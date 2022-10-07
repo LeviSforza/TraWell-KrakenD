@@ -1,0 +1,57 @@
+version: '3.8'
+
+volumes:
+  postgres_data:
+      driver: local
+
+services:
+  postgres:
+      container_name: postgres_data
+      image: postgres:latest
+      user: root
+      ports: 
+        - "5432:5432"
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_DB: keycloak
+        POSTGRES_USER: keycloak
+        POSTGRES_PASSWORD: password
+  keycloak:
+      container_name: keycloak
+      image: jboss/keycloak:latest
+      ports: 
+        - "8403:8080"
+      # command:
+      # - "-b 0.0.0.0 -Dkeycloak.profile.feature.upload_scripts=enabled -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
+      environment:
+        DB_VENDOR: POSTGRES
+        DB_ADDR: postgres_data
+        DB_DATABASE: keycloak
+        DB_USER: keycloak
+        DB_PASSWORD: password
+        DB_SCHEMA: public
+        DB_PORT: 5432
+        # KEYCLOAK_USER: admin
+        # KEYCLOAK_PASSWORD: password
+        # KEYCLOAK_IMPORT: /tmp/config/keycloak/realms/trawell.json
+        JAVA_OPTS_APPEND: "-Dkeycloak.profile.feature.upload_scripts=enabled"
+      # volumes:
+      # - ./realm-export.json:/opt/jboss/keycloak/imports/realm-export.json
+      # - type: bind
+      #   source: ./config/keycloak/realms
+      #   target: /tmp/config/keycloak/realms
+      depends_on:
+        - postgres
+      restart: always
+ 
+  krakend:
+      image: devopsfaith/krakend:latest
+      container_name: krakend_gateway
+      command: run -d -c /etc/krakend/krakend.json
+      ports:
+        - "9000:9000"
+      volumes:
+        - ./gateway:/etc/krakend
+
+ 

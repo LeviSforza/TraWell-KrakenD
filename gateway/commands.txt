@@ -1,0 +1,36 @@
+Docker stuff:
+
+docker build . -t api-gateway
+
+docker run -it -p "9000:9000" api-gateway
+
+Test requests:
+
+For Django simple CRUD server:
+
+GET http://127.0.0.1:9000/v1/quotes
+
+GET http://127.0.0.1:9000/v1/quotes/4
+
+DELETE http://127.0.0.1:9000/v1/quotes/2
+
+POST http://127.0.0.1:9000/v1/quotes
+
+PUT http://127.0.0.1:9000/v1/quotes/11
+
+Example body for POST and PUT: 
+{
+	"title": "hurray it works"
+}
+
+For simple js hello world:
+
+GET http://127.0.0.1:9000/v1/hello
+
+Health check:
+
+GET http://127.0.0.1:9000/v1/__health
+
+
+GET keycloak data
+http://localhost:8403/auth/realms/master/.well-known/openid-configuration

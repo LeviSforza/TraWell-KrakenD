@@ -1,0 +1,52 @@
+{
+    "$schema": "https://www.krakend.io/schema/v3.json",
+    "version": 3,
+    "name": "TraWell - API Gateway",
+    "timeout": "3000ms",
+    "cache_ttl": "300s",
+    "output_encoding": "no-op",
+    "port": 9000,
+    "endpoints": [
+      {
+        "endpoint": "/v1/keycloak-protected",
+        "extra_config": {
+            "auth/validator": {
+                "alg": "RS256",
+                "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+                "issuer": "http://localhost:8403/auth/realms/TraWell",
+                "disable_jwk_security": true,
+                "cache": true
+            }
+        },
+        "backend": [
+            {
+              "host":["host.docker.internal:9000"],
+              "url_pattern": "/__health"
+            }
+        ]
+      },
+      {
+        "endpoint": "/v1/hello",
+        "method": "GET",
+        "output_encoding": "no-op",
+        "extra_config": {
+          "auth/validator": {
+              "alg": "RS256",
+              "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+              "issuer": "http://localhost:8403/auth/realms/TraWell",
+              "disable_jwk_security": true
+          }
+        },
+        "backend": [
+          {
+            "url_pattern": "/hello_world",
+            "encoding": "no-op",
+            "method": "GET",
+            "host": [
+              "host.docker.internal:8001"
+            ]
+          }
+        ]
+      }
+    ]
+  }
