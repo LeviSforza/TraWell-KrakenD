@@ -1,2 +1,31 @@
+
 # TraWell-KrakenD
+
 Repository containing KrakenD configuration for TraWell project
+
+## Device vs how to run keycloak
+
+- On Windows use the command: 
+ 
+        docker-compose up 
+- If you are using Apple iOS Macbook device simple docker-compose up is not enough. You should do following steps:
+
+1. Clone Keycloak containers repository: 
+        
+        git clone git@github.com:keycloak/keycloak-containers.git
+2. Open server directory 
+
+        cd keycloak-containers/server
+3. Checkout at desired versio 
+
+        git checkout 16.1.1
+4. Build docker image 
+
+        docker build -t jboss/keycloak:13.0.1 .
+5. Run Keycloak 
+
+        docker-compose up
+
+
+
+

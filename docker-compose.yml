@@ -32,15 +32,15 @@ services:
         DB_PASSWORD: password
         DB_SCHEMA: public
         DB_PORT: 5432
-        # KEYCLOAK_USER: admin
-        # KEYCLOAK_PASSWORD: password
-        # KEYCLOAK_IMPORT: /tmp/config/keycloak/realms/trawell.json
+        KEYCLOAK_USER: admin
+        KEYCLOAK_PASSWORD: password
+        KEYCLOAK_IMPORT: /tmp/config/keycloak/realms/trawell.json
         JAVA_OPTS_APPEND: "-Dkeycloak.profile.feature.upload_scripts=enabled"
-      # volumes:
-      # - ./realm-export.json:/opt/jboss/keycloak/imports/realm-export.json
-      # - type: bind
-      #   source: ./config/keycloak/realms
-      #   target: /tmp/config/keycloak/realms
+      volumes:
+      - ./realm-export.json:/opt/jboss/keycloak/imports/realm-export.json
+      - type: bind
+        source: ./config/keycloak/realms
+        target: /tmp/config/keycloak/realms
       depends_on:
         - postgres
       restart: always
