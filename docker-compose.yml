@@ -23,7 +23,7 @@ services:
       ports: 
         - "8403:8080"
       # command:
-      # - "-b 0.0.0.0 -Dkeycloak.profile.feature.upload_scripts=enabled -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
+      # - COPY ./requiredaction/target/dasniko.keycloak-requiredaction.jar /opt/jboss/keycloak/standalone/deployments/
       environment:
         DB_VENDOR: POSTGRES
         DB_ADDR: postgres_data
@@ -32,15 +32,21 @@ services:
         DB_PASSWORD: password
         DB_SCHEMA: public
         DB_PORT: 5432
-        KEYCLOAK_USER: admin
-        KEYCLOAK_PASSWORD: password
+        # KEYCLOAK_USER: admin
+        # KEYCLOAK_PASSWORD: password
         KEYCLOAK_IMPORT: /tmp/config/keycloak/realms/trawell.json
         JAVA_OPTS_APPEND: "-Dkeycloak.profile.feature.upload_scripts=enabled"
       volumes:
-      - ./realm-export.json:/opt/jboss/keycloak/imports/realm-export.json
+      # - ./realm-export.json:/opt/jboss/keycloak/imports/realm-export.json
       - type: bind
         source: ./config/keycloak/realms
         target: /tmp/config/keycloak/realms
+      - type: bind
+        source: ./themes/trawell
+        target: /opt/jboss/keycloak/themes/trawell
+      - type: bind
+        source: ./requiredaction/target/dasniko.keycloak-requiredaction.jar
+        target: /opt/jboss/keycloak/standalone/deployments/dasniko.keycloak-requiredaction.jar
       depends_on:
         - postgres
       restart: always
