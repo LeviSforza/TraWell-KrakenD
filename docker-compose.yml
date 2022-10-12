@@ -46,8 +46,8 @@ services:
         source: ./themes/trawell
         target: /opt/jboss/keycloak/themes/trawell
       - type: bind
-        source: ./themes/alfresco-keycloak-theme
-        target: /opt/jboss/keycloak/themes/alfresco-keycloak-theme
+        source: ./themes/alf-theme
+        target: /opt/jboss/keycloak/themes/alf-theme
       - type: bind
         source: ./themes/cyboinsect-theme
         target: /opt/jboss/keycloak/themes/cyboinsect-theme
