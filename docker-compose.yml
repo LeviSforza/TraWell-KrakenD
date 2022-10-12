@@ -35,7 +35,8 @@ services:
         # KEYCLOAK_USER: admin
         # KEYCLOAK_PASSWORD: password
         KEYCLOAK_IMPORT: /tmp/config/keycloak/realms/trawell.json
-        JAVA_OPTS_APPEND: "-Dkeycloak.profile.feature.upload_scripts=enabled"
+        KEYCLOAK_FEATURES: 'declarative_user_profile'
+        JAVA_OPTS_APPEND: "-Dkeycloak.profile.feature.upload_scripts=enabled -Dkeycloak.profile.feature.declarative_user_profile=enabled"
       volumes:
       # - ./realm-export.json:/opt/jboss/keycloak/imports/realm-export.json
       - type: bind
@@ -44,9 +45,6 @@ services:
       - type: bind
         source: ./themes/trawell
         target: /opt/jboss/keycloak/themes/trawell
-      - type: bind
-        source: ./requiredaction/target/dasniko.keycloak-requiredaction.jar
-        target: /opt/jboss/keycloak/standalone/deployments/dasniko.keycloak-requiredaction.jar
       depends_on:
         - postgres
       restart: always
