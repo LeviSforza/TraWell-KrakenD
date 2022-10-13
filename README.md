@@ -31,10 +31,26 @@ KEYCLOAK_USER and KEYCLOAK_PASSWORD are needed only for the first time running t
 
 
 Useful links:
-- Admin console: http://localhost:8403/auth/
-- Login to users accounts: http://localhost:8403/auth/realms/TraWell/account/#/
-- User info (you need to have access token to get it): http://localhost:8403/auth/realms/TraWell/protocol/openid-connect/userinfo
-- Keycloak well-known info: http://localhost:8403/auth/realms/TraWell/.well-known/openid-configuration
-- Health check (to check if KrakenD is working): http://localhost:9000/__health
-- Health check but protected by keycloak auth (can be used to test if user was correctly authenticated): http://localhost:9000/keycloak-protected
+- Admin console: GET http://localhost:8403/auth/
+- Login to users accounts: GET http://localhost:8403/auth/realms/TraWell/account/#/
+- User info (you need to have access token to get it): GET http://localhost:8403/auth/realms/TraWell/protocol/openid-connect/userinfo
+- Keycloak well-known info: GET http://localhost:8403/auth/realms/TraWell/.well-known/openid-configuration
+- Health check (to check if KrakenD is working): GET http://localhost:9000/__health
+- Health check but protected by keycloak auth (can be used to test if user was correctly authenticated): GET http://localhost:9000/keycloak-protected
 
+How to add role to a user:
+- you need to be logged in as user with admin_cli role. You can do it by basic curl for test purposes: 
+        
+        curl -d "client_id=admin-cli" -d "username=admin@admin"  -d "password=password"  -d "grant_type=password"  "http://localhost:8403/auth/realms/TraWell/protocol/openid-connect/token"
+
+- get all users and find id of a user you need: GET http://localhost:8403/auth/admin/realms/TraWell/users
+- get all roles and find id and name of the role that you need: GET http://localhost:8403/auth/admin/realms/TraWell/roles
+- assign role to user: POST http://localhost:8403/auth/admin/realms/TraWell/users/{user_id}/role-mappings/realm
+  Body:
+        [
+         {
+                "id": role_id,
+                "name": role_name,
+         }
+        ]
+- check if role was correctly assigned: GET http://localhost:8403/auth/admin/realms/TraWell/users/{user_id}/role-mappings/realm

@@ -67,6 +67,7 @@
             "url_pattern": "/rides",
             "encoding": "json",
             "method": "GET",
+            "is_collection": true,
             "host": [
               "host.docker.internal:8000"
             ]
@@ -166,6 +167,7 @@
             "url_pattern": "/user_rides/{user_id}",
             "encoding": "json",
             "method": "GET",
+            "is_collection": true,
             "host": [
               "host.docker.internal:8000"
             ]
@@ -298,6 +300,7 @@
             "url_pattern": "/vehicles/{user_id}",
             "encoding": "json",
             "method": "GET",
+            "is_collection": true,
             "host": [
               "host.docker.internal:8000"
             ]
@@ -458,6 +461,7 @@
             "url_pattern": "/reviews/{user_id}",
             "encoding": "json",
             "method": "GET",
+            "is_collection": true,
             "host": [
               "host.docker.internal:8000"
             ]
