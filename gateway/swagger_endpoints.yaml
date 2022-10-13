@@ -18,26 +18,26 @@ paths:
           schema:
             type: integer
           description: Maximum results per page
-        - name: driver_type
+        - name: driver__private__exact
           in: query
           schema:
             type: string
-          description: Driver type
-        - name: driver_ratings
+          description: Is driver private
+        - name: driver__avg_rate__gte
           in: query
           schema:
             type: number
-          description: Driver ratings
-        - name: price_from
+          description: Driver ratings greater than
+        - name: price__lt
           in: query
           schema:
             type: number
-          description: Price from
-        - name: price_to
+          description: Price lower than
+        - name: price__gt
           in: query
           schema:
             type: number
-          description: Price to
+          description: Price greater than
       responses:
         '200':
           description: OK
