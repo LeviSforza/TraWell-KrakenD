@@ -43,14 +43,8 @@ services:
         source: ./config/keycloak/realms
         target: /tmp/config/keycloak/realms
       - type: bind
-        source: ./themes/trawell
-        target: /opt/jboss/keycloak/themes/trawell
-      - type: bind
-        source: ./themes/alfr-theme
-        target: /opt/jboss/keycloak/themes/alfr-theme
-      - type: bind
-        source: ./themes/cyboinsect-theme
-        target: /opt/jboss/keycloak/themes/cyboinsect-theme
+        source: ./themes/custom
+        target: /opt/jboss/keycloak/themes/custom
       depends_on:
         - postgres
       restart: always
