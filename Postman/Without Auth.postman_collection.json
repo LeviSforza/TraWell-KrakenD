@@ -1,0 +1,71 @@
+{
+	"info": {
+		"_postman_id": "c177ae34-3510-44aa-9fa2-0c8d69d35abf",
+		"name": "Without Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19301072"
+	},
+	"item": [
+		{
+			"name": "well_known",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8403/auth/realms/TraWell/.well-known/openid-configuration",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8403",
+					"path": [
+						"auth",
+						"realms",
+						"TraWell",
+						".well-known",
+						"openid-configuration"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/__health",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"__health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "try_keycloak_protected but no auth",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/keycloak-protected",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"keycloak-protected"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

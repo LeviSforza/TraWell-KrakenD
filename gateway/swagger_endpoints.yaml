@@ -1,0 +1,590 @@
+openapi: 3.0.3
+info:
+  title: TRAWELL
+  description: TraWell API docs
+  version: 1.0.0
+paths:
+  /rides:
+    get:
+      summary: Get all available rides
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+          description: Number of page
+        - name: max_results
+          in: query
+          schema:
+            type: integer
+          description: Maximum results per page
+        - name: driver__private__exact
+          in: query
+          schema:
+            type: string
+          description: Is driver private
+        - name: driver__avg_rate__gte
+          in: query
+          schema:
+            type: number
+          description: Driver ratings greater than
+        - name: price__lt
+          in: query
+          schema:
+            type: number
+          description: Price lower than
+        - name: price__gt
+          in: query
+          schema:
+            type: number
+          description: Price greater than
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ride'
+        '401':
+          description: Not authenticated
+    post:
+      summary: Post new ride
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                city_from:
+                  $ref: '#/components/schemas/city'
+                city_to:
+                  $ref: '#/components/schemas/city'
+                area_from:
+                  type: string
+                area_to:
+                  type: string
+                start_date:
+                  type: string
+                duration:
+                  type: object
+                  properties:
+                    hours:
+                      type: integer
+                    minutes:
+                      type: integer
+                price:
+                  type: number
+                seats:
+                  type: integer
+                description:
+                  type: string
+                is_automatic_accept:
+                  type: boolean
+                vehicle_id:
+                  type: integer
+                coordinates:
+                  type: array
+                  items: 
+                    $ref: '#/components/schemas/coordinates'
+      responses:
+        '200': 
+          description: OK
+        '400':
+          description: Wrong input
+        '401':
+          description: Not authenticated
+          
+  /rides/{ride_id}:
+    get:
+      summary: Finds a ride by id
+      description: Returns general information ride by specified id.
+      parameters:
+        - name: ride_id
+          required: true
+          in: path
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ride'
+        '401':
+          description: Not authenticated
+        '404':
+          description: Ride not found
+    delete:
+      summary: Deletes a ride
+      parameters:
+        - name: ride_id
+          required: true
+          description: Ride id to delete
+          in: path
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Not authenticated
+        '404':
+          description: Ride not found
+          
+  /user_rides/{user_id}:
+    get:
+      summary: Find all rides
+      description: Returns user's all rides
+      parameters:
+        - name: user_id
+          required: true
+          in: path
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ride'
+        '401':
+          description: Not authenticated
+        '404':
+          description: User do not have any ride
+  
+  /rides/{ride_id}/request:
+    post:
+      summary: Report a new request to ride
+      parameters: 
+        - name: ride_id
+          required: true
+          in: path
+          schema:
+            type: integer
+        - name: user_id
+          required: true
+          in: query
+          description: User requesting to join a ride
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Ride does not have empty seats
+        '401':
+          description: Not authenticated
+        '404':
+          description: Ride not found
+
+  /rides/request/{request_id}:
+    delete:
+      summary: Remove pending request
+      parameters:
+        - name: request_id
+          required: true
+          in: path
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Not authenticated
+        '404':
+          description: Not found pending request
+    post:
+      summary: Confirm or reject pending request
+      parameters:
+        - name: request_id
+          required: true
+          in: path
+          schema:
+            type: integer
+        - name: is_accepted
+          required: true
+          in: query
+          schema:
+            type: integer
+          description: true when request accepted, false when request rejected
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Not authenticated
+        '404':
+          description: Not found pending request
+  
+  /users/{user_id}:
+    get:
+        description: Finds a user by id
+        parameters:
+          - name: user_id
+            required: true
+            in: path
+            schema:
+              type: integer
+        responses:
+          '200':
+            description: Finds a user by id
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/user'
+          '401':
+            description: Not authenticated
+          '404':
+            description: Ride not found
+            
+  /vehicles/{user_id}:
+    get:
+      description: Get all user's vehicles
+      parameters:
+          - name: user_id
+            required: true
+            in: path
+            schema:
+              type: array
+              items: 
+                  $ref: '#/components/schemas/vehicle'
+      responses:
+        '200':
+          description: Returns all user's vehicles
+          content:
+            application/json:
+                schema:
+                  $ref: '#/components/schemas/vehicle'
+        '401':
+            description: Not authenticated
+        '404':
+            description: User not found
+            
+    post:
+      description: Add new vehicle for user
+      parameters:
+          - name: user_id
+            required: true
+            in: path
+            schema:
+              type: integer
+              items: 
+                  $ref: '#/components/schemas/vehicle'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                make: 
+                  type: string
+                model: 
+                  type: string
+                color: 
+                  type: string
+      responses:
+        '200':
+            description: OK
+        '400':
+            description: Some parameters are missing
+        '401':
+            description: Not authenticated
+        '404':
+            description: User not found
+  
+  /vehicles/{car_id}:
+    delete:
+      summary: Removes car with specified id
+      parameters:
+        - name: car_id
+          description: Id car that needs to be removed
+          required: true
+          in: path
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Not authenticated
+        '404':
+          description: Vehicle not found
+        
+  /notifications/new_request/{ride_id}:
+    post:
+      summary: Send mail with request confirmation
+      parameters:
+        - name: ride_id
+          description: Confirmation for specified request
+          required: true
+          in: path
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                driver_id:
+                  type: integer
+                passenger_id:
+                  type: integer
+                was_accepted:
+                  type: boolean
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Some data is missing
+        '401':
+          description: Not authenticated
+        '404':
+          description: Ride not found
+  /notifications/request_confirm/{ride_id}:
+    post:
+      summary: Send mail with request confirmation
+      parameters:
+        - name: ride_id
+          description: Confirmation for specified request
+          required: true
+          in: path
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                driver_id:
+                  type: integer
+                passenger_id:
+                  type: integer
+                was_accepted:
+                  type: boolean
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Some data is missing
+        '401':
+          description: Not authenticated
+        '404':
+          description: Ride not found
+          
+  /notifications/edit_ride/{ride_id}:
+    post:
+      summary: Send mail when ride was edited
+      parameters:
+        - name: ride_id
+          description: Ride that was edited
+          required: true
+          in: path
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                driver_id:
+                  type: integer
+                passenger_id:
+                  type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Some data is missing
+        '401':
+          description: Not authenticated
+        '403':
+          description: User do not have permission
+        '404':
+          description: Ride not found
+                
+  /reviews/{user_id}:
+    get:
+      summary: Get all reviews about specified user
+      parameters:
+        - name: user_id
+          description: User's reviews
+          required: true
+          in: path
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: '#/components/schemas/review'
+        '401':
+          description: Not authenticated
+        '403':
+          description: User do not have permission
+        '404':
+          description: User not found
+    post:
+      summary: Add new review for user
+      parameters:
+        - name: user_id
+          description: Review for user
+          required: true
+          in: path
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                reviewer_id:
+                  type: integer
+                was_a_driver:
+                  type: boolean
+                stars:
+                  type: integer
+                description:
+                  type: string
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Some parameters are missing
+        '401':
+          description: Not authenticated
+        '404':
+          description: User not found
+  /reviews/{review_id}:
+    delete:
+      summary: Delete a review
+      parameters: 
+        - name: review_id
+          description: Review to delete
+          required: true
+          in: path
+          schema:
+            type: integer
+      responses:
+        '200': 
+          description: OK
+        '401':
+          description: Not authenticated
+        '403':
+          description: User do not have permission
+        '404':
+          description: Review not found
+        
+      
+components:
+  schemas:
+    city:
+      type: object
+      properties:
+        city_id:
+          type: integer
+        name: 
+          type: string
+        county:
+          type: string
+        state:
+          type: string
+        lat: 
+          type: number
+        lng: 
+          type: number
+        
+    user:
+      type: object
+      properties:
+        user_id:
+          type: integer
+        first_name: 
+          type: string
+        last_name:
+          type: string
+        
+    ride:
+      type: object
+      properties:
+        ride_id:
+          type: integer
+        city_from:
+          $ref: '#/components/schemas/city'
+        city_to:
+          $ref: '#/components/schemas/city'
+        area_from:
+          type: string
+        area_to:
+          type: string
+        start_date:
+          type: string
+        end_date:
+          type: string
+        price:
+          type: number
+        seats:
+          type: integer
+        available_seats:
+          type: integer
+        description:
+          type: string
+        driver:
+          type: object
+          properties:
+            user_id:
+              type: integer
+            name:
+              type: string
+            avg_rate:
+              type: number
+        vehicle:
+          $ref: '#/components/schemas/vehicle'
+    
+    vehicle:
+      type: object
+      properties:
+        vehicle_id:
+          type: integer
+        make:
+          type: string
+        model:
+          type: string
+        color:
+          type: string
+          
+    review:
+      type: object
+      properties:
+        review_id:
+          type: integer
+        stars:
+          type: integer
+        description:
+          type: string
+        was_rated_as_driver:
+          type: boolean
+        reviewer_name:
+          type: string
+    
+    coordinates:
+      type: object
+      properties:
+        lat:
+          type: number
+        lng:
+          type: number
+        sequence_no:
+          type: number
+        
+          
