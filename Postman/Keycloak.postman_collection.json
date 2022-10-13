@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "45658c62-2fbd-47f3-a762-49aab95f8874",
+		"name": "Keycloak",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19301072"
+	},
+	"item": [
+		{
+			"name": "try_keycloak_protected",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/keycloak-protected",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"keycloak-protected"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8403/auth/admin/realms/TraWell/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8403",
+					"path": [
+						"auth",
+						"admin",
+						"realms",
+						"TraWell",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user info",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8403/auth/realms/TraWell/protocol/openid-connect/userinfo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8403",
+					"path": [
+						"auth",
+						"realms",
+						"TraWell",
+						"protocol",
+						"openid-connect",
+						"userinfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get realm roles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8403/auth/admin/realms/TraWell/roles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8403",
+					"path": [
+						"auth",
+						"admin",
+						"realms",
+						"TraWell",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get realm users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8403/auth/admin/realms/TraWell/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8403",
+					"path": [
+						"auth",
+						"admin",
+						"realms",
+						"TraWell",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "assign role to user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJVWUxwNjc4ZWkzcm1xQ0Y0VHV5TGZBSUg2WDFnTURkSFIzWkZpSjlPS1Q0In0.eyJleHAiOjE2NjU2NTk3MTIsImlhdCI6MTY2NTY1OTQxMiwianRpIjoiZTVmOTExYzAtOTlkMi00Yjg1LTkzZDYtMzBjOTU5Njg4YjVkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4NDAzL2F1dGgvcmVhbG1zL1RyYVdlbGwiLCJhdWQiOlsic29jaWFsLW9hdXRoIiwicmVhbG0tbWFuYWdlbWVudCIsImtyYWtlbmQiLCJyZWFjdCIsImFjY291bnQiXSwic3ViIjoiZjkyODZmZjUtMTE3Yy00MDkzLWFjOGMtMmVkNTI0N2FkODMwIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYWRtaW4tY2xpIiwic2Vzc2lvbl9zdGF0ZSI6IjMyM2FmODlkLWIzMzMtNDc3ZS1iZDdlLWNhZjMxYTIwYzdjYiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJhcHAtYWRtaW4iLCJ1bWFfYXV0aG9yaXphdGlvbiIsImFwcC11c2VyIiwiZGVmYXVsdC1yb2xlcy10cmF3ZWxsIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsic29jaWFsLW9hdXRoIjp7InJvbGVzIjpbImFkbWluIiwidXNlciJdfSwicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsInZpZXctcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsInJlYWxtLWFkbWluIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2VycyIsInF1ZXJ5LXJlYWxtcyIsInZpZXctYXV0aG9yaXphdGlvbiIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS11c2VycyIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5hZ2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIiwicXVlcnktZ3JvdXBzIl19LCJrcmFrZW5kIjp7InJvbGVzIjpbImFkbWluIiwidXNlciJdfSwiYWRtaW4tY2xpIjp7InJvbGVzIjpbImFkbWluX2NsaSJdfSwicmVhY3QiOnsicm9sZXMiOlsiYWRtaW4iLCJ1c2VyIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiIzMjNhZjg5ZC1iMzMzLTQ3N2UtYmQ3ZS1jYWYzMWEyMGM3Y2IiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFkbWluIEFkbWluIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW5AYWRtaW4iLCJnaXZlbl9uYW1lIjoiQWRtaW4iLCJmYW1pbHlfbmFtZSI6IkFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbiJ9.OpneJGa8a0a0lIvw_tO9Fmdnv_ne7Nl0hpjZ9v1PKclJumTQoDCxhTVBthqcizU7TabUpcmlY4kwn4Wc9qRYvmuCZReflVOeEX-UvGbRt-ay7Ptkww2ZYXplwbR8wpMHd2OIJcBZPjWsecTJjY7Mo9seOtd5YeHRWtxc41HMLocpgfuoK431x4Jx9x_CS6Y6yt8FlyUw48R_GmHVwnptIJzZgy6hkTBaBccv9aTPwRK2WXvaZ0xrD40LLlbRXECIrdp_ZwqvY8wsB8rLfSj_-xuqUDkpxm1LKy2R4VDBL3Ywk2wdAj-KqP1ayLSdKsAMH9vWOFPrVVaSceZyWH1J-A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"id\": \"09675837-4fd9-4f2b-82db-56567b275a8d\",\r\n        \"name\": \"company_user\"\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8403/auth/admin/realms/TraWell/users/7e1080a3-b03e-4dd2-bd5e-326e30d2c0fb/role-mappings/realm",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8403",
+					"path": [
+						"auth",
+						"admin",
+						"realms",
+						"TraWell",
+						"users",
+						"7e1080a3-b03e-4dd2-bd5e-326e30d2c0fb",
+						"role-mappings",
+						"realm"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "check if role is assigned to user",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJVWUxwNjc4ZWkzcm1xQ0Y0VHV5TGZBSUg2WDFnTURkSFIzWkZpSjlPS1Q0In0.eyJleHAiOjE2NjU2NTk3MTIsImlhdCI6MTY2NTY1OTQxMiwianRpIjoiZTVmOTExYzAtOTlkMi00Yjg1LTkzZDYtMzBjOTU5Njg4YjVkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4NDAzL2F1dGgvcmVhbG1zL1RyYVdlbGwiLCJhdWQiOlsic29jaWFsLW9hdXRoIiwicmVhbG0tbWFuYWdlbWVudCIsImtyYWtlbmQiLCJyZWFjdCIsImFjY291bnQiXSwic3ViIjoiZjkyODZmZjUtMTE3Yy00MDkzLWFjOGMtMmVkNTI0N2FkODMwIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYWRtaW4tY2xpIiwic2Vzc2lvbl9zdGF0ZSI6IjMyM2FmODlkLWIzMzMtNDc3ZS1iZDdlLWNhZjMxYTIwYzdjYiIsImFjciI6IjEiLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJhcHAtYWRtaW4iLCJ1bWFfYXV0aG9yaXphdGlvbiIsImFwcC11c2VyIiwiZGVmYXVsdC1yb2xlcy10cmF3ZWxsIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsic29jaWFsLW9hdXRoIjp7InJvbGVzIjpbImFkbWluIiwidXNlciJdfSwicmVhbG0tbWFuYWdlbWVudCI6eyJyb2xlcyI6WyJ2aWV3LWlkZW50aXR5LXByb3ZpZGVycyIsInZpZXctcmVhbG0iLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsInJlYWxtLWFkbWluIiwiY3JlYXRlLWNsaWVudCIsIm1hbmFnZS11c2VycyIsInF1ZXJ5LXJlYWxtcyIsInZpZXctYXV0aG9yaXphdGlvbiIsInF1ZXJ5LWNsaWVudHMiLCJxdWVyeS11c2VycyIsIm1hbmFnZS1ldmVudHMiLCJtYW5hZ2UtcmVhbG0iLCJ2aWV3LWV2ZW50cyIsInZpZXctdXNlcnMiLCJ2aWV3LWNsaWVudHMiLCJtYW5hZ2UtYXV0aG9yaXphdGlvbiIsIm1hbmFnZS1jbGllbnRzIiwicXVlcnktZ3JvdXBzIl19LCJrcmFrZW5kIjp7InJvbGVzIjpbImFkbWluIiwidXNlciJdfSwiYWRtaW4tY2xpIjp7InJvbGVzIjpbImFkbWluX2NsaSJdfSwicmVhY3QiOnsicm9sZXMiOlsiYWRtaW4iLCJ1c2VyIl19LCJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6InByb2ZpbGUgZW1haWwiLCJzaWQiOiIzMjNhZjg5ZC1iMzMzLTQ3N2UtYmQ3ZS1jYWYzMWEyMGM3Y2IiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IkFkbWluIEFkbWluIiwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW5AYWRtaW4iLCJnaXZlbl9uYW1lIjoiQWRtaW4iLCJmYW1pbHlfbmFtZSI6IkFkbWluIiwiZW1haWwiOiJhZG1pbkBhZG1pbiJ9.OpneJGa8a0a0lIvw_tO9Fmdnv_ne7Nl0hpjZ9v1PKclJumTQoDCxhTVBthqcizU7TabUpcmlY4kwn4Wc9qRYvmuCZReflVOeEX-UvGbRt-ay7Ptkww2ZYXplwbR8wpMHd2OIJcBZPjWsecTJjY7Mo9seOtd5YeHRWtxc41HMLocpgfuoK431x4Jx9x_CS6Y6yt8FlyUw48R_GmHVwnptIJzZgy6hkTBaBccv9aTPwRK2WXvaZ0xrD40LLlbRXECIrdp_ZwqvY8wsB8rLfSj_-xuqUDkpxm1LKy2R4VDBL3Ywk2wdAj-KqP1ayLSdKsAMH9vWOFPrVVaSceZyWH1J-A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8403/auth/admin/realms/TraWell/users/7e1080a3-b03e-4dd2-bd5e-326e30d2c0fb/role-mappings/realm",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8403",
+					"path": [
+						"auth",
+						"admin",
+						"realms",
+						"TraWell",
+						"users",
+						"7e1080a3-b03e-4dd2-bd5e-326e30d2c0fb",
+						"role-mappings",
+						"realm"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "tokenName",
+				"value": "super-token",
+				"type": "string"
+			},
+			{
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
+			},
+			{
+				"key": "scope",
+				"value": "{{AUTH_SCOPE}}",
+				"type": "string"
+			},
+			{
+				"key": "redirect_uri",
+				"value": "{{AUTH_CALLBACK_URL}}",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "authorization_code",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{AUTH_CLIENT_SECRET}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{AUTH_CLIENT_ID}}",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "{{AUTH_URL}}",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{AUTH_ACCESS_TOKEN_URL}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
