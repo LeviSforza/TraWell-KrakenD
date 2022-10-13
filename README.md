@@ -36,4 +36,5 @@ Useful links:
 - User info (you need to have access token to get it): http://localhost:8403/auth/realms/TraWell/protocol/openid-connect/userinfo
 - Keycloak well-known info: http://localhost:8403/auth/realms/TraWell/.well-known/openid-configuration
 - Health check (to check if KrakenD is working): http://localhost:9000/__health
+- Health check but protected by keycloak auth (can be used to test if user was correctly authenticated): http://localhost:9000/keycloak-protected
 
