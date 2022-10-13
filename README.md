@@ -30,7 +30,7 @@ Repository containing KrakenD configuration for TraWell project
 KEYCLOAK_USER and KEYCLOAK_PASSWORD are needed only for the first time running the container. After that these two lines should be commented in docker-compose.yml as otherwise they can lead to unnecessary errors.
 
 
-##Useful links:
+## Useful links:
 
 Login in browser:
 - Admin console: GET http://localhost:8403/auth/
