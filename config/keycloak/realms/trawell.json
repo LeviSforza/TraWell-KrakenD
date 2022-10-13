@@ -46,6 +46,15 @@
   "roles": {
     "realm": [
       {
+        "id": "09675837-4fd9-4f2b-82db-56567b275a8d",
+        "name": "company_user",
+        "description": "Company User Account Marker",
+        "composite": false,
+        "clientRole": false,
+        "containerId": "a8ff61cf-0a55-4613-8017-fbfb439bd124",
+        "attributes": {}
+      },
+      {
         "id": "5c9e8beb-b41d-40ce-82d8-15fddde94f1f",
         "name": "app-user",
         "description": "Realm user role",
@@ -63,6 +72,15 @@
             ]
           }
         },
+        "clientRole": false,
+        "containerId": "a8ff61cf-0a55-4613-8017-fbfb439bd124",
+        "attributes": {}
+      },
+      {
+        "id": "c6f6c89a-b0d3-4882-ba2e-1152c577bba8",
+        "name": "private_user",
+        "description": "Private User Account Marker",
+        "composite": false,
         "clientRole": false,
         "containerId": "a8ff61cf-0a55-4613-8017-fbfb439bd124",
         "attributes": {}
@@ -410,7 +428,16 @@
         }
       ],
       "security-admin-console": [],
-      "admin-cli": [],
+      "admin-cli": [
+        {
+          "id": "0383c806-586e-4a29-9c84-b202aaa22bed",
+          "name": "admin_cli",
+          "composite": false,
+          "clientRole": true,
+          "containerId": "819a5a90-395e-45cc-ab7f-7d3b0c99e97c",
+          "attributes": {}
+        }
+      ],
       "react": [
         {
           "id": "7cc1247c-6ad3-4224-9d7e-3d1bb2275c03",
@@ -595,6 +622,14 @@
   ],
   "scopeMappings": [
     {
+      "client": "admin-cli",
+      "roles": [
+        "app-admin",
+        "uma_authorization",
+        "default-roles-trawell"
+      ]
+    },
+    {
       "clientScope": "offline_access",
       "roles": [
         "offline_access"
@@ -602,6 +637,14 @@
     }
   ],
   "clientScopeMappings": {
+    "realm-management": [
+      {
+        "client": "admin-cli",
+        "roles": [
+          "realm-admin"
+        ]
+      }
+    ],
     "account": [
       {
         "client": "account-console",
@@ -1099,6 +1142,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
+      "secret": "**********",
       "redirectUris": [],
       "webOrigins": [],
       "notBefore": 0,
@@ -1829,7 +1873,7 @@
     "ssl": "true",
     "user": "trawell.travel.well@gmail.com"
   },
-  "loginTheme": "keycloak",
+  "loginTheme": "custom",
   "eventsEnabled": true,
   "eventsListeners": [
     "jboss-logging"
