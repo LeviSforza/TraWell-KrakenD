@@ -45,7 +45,7 @@
             "encoding": "json",
             "method": "GET",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8003"
             ]
           }
         ]
@@ -69,7 +69,7 @@
             "method": "GET",
             "is_collection": true,
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8001"
             ]
           }
         ]
@@ -93,7 +93,7 @@
             "encoding": "json",
             "method": "POST",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8001"
             ]
           }
         ]
@@ -116,7 +116,7 @@
             "encoding": "json",
             "method": "GET",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8001"
             ]
           }
         ],
@@ -142,7 +142,7 @@
             "encoding": "no-op",
             "method": "DELETE",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8001"
             ]
           }
         ],
@@ -169,7 +169,7 @@
             "method": "GET",
             "is_collection": true,
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8001"
             ]
           }
         ],
@@ -196,7 +196,7 @@
             "encoding": "json",
             "method": "POST",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8001"
             ]
           }
         ],
@@ -222,7 +222,7 @@
             "encoding": "json",
             "method": "DELETE",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8001"
             ]
           }
         ],
@@ -249,7 +249,7 @@
             "encoding": "json",
             "method": "POST",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8003"
             ]
           }
         ],
@@ -275,7 +275,7 @@
             "encoding": "json",
             "method": "GET",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8003"
             ]
           }
         ],
@@ -302,7 +302,7 @@
             "method": "GET",
             "is_collection": true,
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8003"
             ]
           }
         ],
@@ -329,7 +329,7 @@
             "encoding": "json",
             "method": "POST",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8003"
             ]
           }
         ],
@@ -355,7 +355,7 @@
             "encoding": "json",
             "method": "DELETE",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8003"
             ]
           }
         ],
@@ -382,7 +382,7 @@
             "encoding": "json",
             "method": "POST",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8005"
             ]
           }
         ],
@@ -409,7 +409,7 @@
             "encoding": "json",
             "method": "POST",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8005"
             ]
           }
         ],
@@ -436,7 +436,7 @@
             "encoding": "json",
             "method": "POST",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8005"
             ]
           }
         ],
@@ -463,7 +463,7 @@
             "method": "GET",
             "is_collection": true,
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8004"
             ]
           }
         ],
@@ -490,7 +490,7 @@
             "encoding": "json",
             "method": "POST",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8004"
             ]
           }
         ],
@@ -516,7 +516,7 @@
             "encoding": "json",
             "method": "DELETE",
             "host": [
-              "host.docker.internal:8000"
+              "host.docker.internal:8004"
             ]
           }
         ],

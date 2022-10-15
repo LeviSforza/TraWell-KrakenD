@@ -5,3 +5,9 @@ For the time being every enpoint in krakend.json demands authentication. If it t
 
 Right now, every endopoint also assumes that response data will be in JSON format. If you need to return data in response to request in different format, you should change "output_encoding" and "encoding" for your endpoint accordingly -> [KrakenD documentation for content types](https://www.krakend.io/docs/endpoints/content-types/) 
 
+Each microservice has an assigned port:
+- 8001 - rides
+- 8002 - history
+- 8003 - users
+- 8004 - reviews
+- 8005 - notifications
