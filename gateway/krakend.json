@@ -445,7 +445,7 @@
         ]
       },
       {
-        "endpoint": "/notifications/ride_cancelled/{ride_id}",
+        "endpoint": "/notifications/ride_canceled/{ride_id}",
         "method": "POST",
         "output_encoding": "json",
         "input_headers": ["*"],
@@ -459,7 +459,7 @@
         },
         "backend": [
           {
-            "url_pattern": "/notifications/ride_cancelled/{ride_id}",
+            "url_pattern": "/notifications/ride_canceled/{ride_id}",
             "encoding": "json",
             "method": "POST",
             "host": [
