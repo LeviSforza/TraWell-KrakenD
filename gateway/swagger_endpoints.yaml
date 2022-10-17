@@ -476,7 +476,7 @@ paths:
         '404':
           description: Ride not found
 
-  /notifications/ride_cancelled/{ride_id}:
+  /notifications/ride_canceled/{ride_id}:
     post:
       summary: Send mail when ride was cancelled by driver
       parameters:
