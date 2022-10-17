@@ -445,6 +445,60 @@
         ]
       },
       {
+        "endpoint": "/notifications/ride_cancelled/{ride_id}",
+        "method": "POST",
+        "output_encoding": "json",
+        "input_headers": ["*"],
+        "extra_config": {
+          "auth/validator": {
+              "alg": "RS256",
+              "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+              "issuer": "http://localhost:8403/auth/realms/TraWell",
+              "disable_jwk_security": true
+          }
+        },
+        "backend": [
+          {
+            "url_pattern": "/notifications/ride_cancelled/{ride_id}",
+            "encoding": "json",
+            "method": "POST",
+            "host": [
+              "host.docker.internal:8005"
+            ]
+          }
+        ],
+        "input_query_strings": [
+          "{ride_id}"
+        ]
+      },
+      {
+        "endpoint": "/notifications/user_resigenation/{ride_id}",
+        "method": "POST",
+        "output_encoding": "json",
+        "input_headers": ["*"],
+        "extra_config": {
+          "auth/validator": {
+              "alg": "RS256",
+              "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+              "issuer": "http://localhost:8403/auth/realms/TraWell",
+              "disable_jwk_security": true
+          }
+        },
+        "backend": [
+          {
+            "url_pattern": "/notifications/user_resigenation/{ride_id}",
+            "encoding": "json",
+            "method": "POST",
+            "host": [
+              "host.docker.internal:8005"
+            ]
+          }
+        ],
+        "input_query_strings": [
+          "{ride_id}"
+        ]
+      },
+      {
         "endpoint": "/reviews/{user_id}",
         "method": "GET",
         "output_encoding": "json",

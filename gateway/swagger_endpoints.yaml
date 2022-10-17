@@ -344,6 +344,7 @@ paths:
           description: Not authenticated
         '404':
           description: Ride not found
+
   /notifications/request_confirm/{ride_id}:
     post:
       summary: Send mail with request confirmation
@@ -394,8 +395,8 @@ paths:
               properties:
                 driver_id:
                   type: integer
-                passenger_id:
-                  type: integer
+                passenger_ids:
+                  type: array
       responses:
         '200':
           description: OK
@@ -407,7 +408,71 @@ paths:
           description: User do not have permission
         '404':
           description: Ride not found
-                
+
+  /notifications/ride_cancelled/{ride_id}:
+    post:
+      summary: Send mail when ride was cancelled by driver
+      parameters:
+        - name: ride_id
+          description: Ride that was cancelled
+          required: true
+          in: path
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                driver_id:
+                  type: integer
+                passenger_ids:
+                  type: array
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Some data is missing
+        '401':
+          description: Not authenticated
+        '403':
+          description: User do not have permission
+        '404':
+          description: Ride not found
+
+  /notifications/user_resigenation/{ride_id}:
+    post:
+      summary: Send mail when user resigned from participation in ride
+      parameters:
+        - name: ride_id
+          description: Ride that passenger resigned from
+          required: true
+          in: path
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                driver_id:
+                  type: integer
+                passenger_ids:
+                  type: array
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Some data is missing
+        '401':
+          description: Not authenticated
+        '403':
+          description: User do not have permission
+        '404':
+          description: Ride not found
+            
   /reviews/{user_id}:
     get:
       summary: Get all reviews about specified user
@@ -465,6 +530,7 @@ paths:
           description: Not authenticated
         '404':
           description: User not found
+
   /reviews/{review_id}:
     delete:
       summary: Delete a review
