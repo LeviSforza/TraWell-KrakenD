@@ -680,6 +680,17 @@ components:
               type: string
             avg_rate:
               type: string
+            avatar:
+              type: string
+            private:
+              type: boolean
+        duration:
+          type: object
+          properties:
+            hours:
+              type: integer
+            minutes:
+              type: integer
         vehicle:
           $ref: '#/components/schemas/vehicle'
 
