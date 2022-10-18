@@ -4,9 +4,9 @@ info:
   description: TraWell API docs
   version: 1.0.0
 paths:
-  /rides:
+  /rides/get_filtered/:
     get:
-      summary: Get all available rides
+      summary: Get filtered rides
       parameters:
         - name: page
           in: query
@@ -16,7 +16,7 @@ paths:
         - name: is_ride_private
           in: query
           schema:
-            type: bool
+            type: boolean
           description: Is ride private
         - name: driver_rate
           in: query
@@ -38,16 +38,6 @@ paths:
           schema:
             type: string
           description: Available options -> price, start_date, duration, available_seats
-        - name: city_from
-          in: query
-          schema:
-            type: string
-          description: Name of city from
-        - name: city_to
-          in: query
-          schema:
-            type: string
-          description: Name of city to
         - name: seats
           in: query
           schema:
@@ -58,6 +48,46 @@ paths:
           schema:
             type: string
           description: Start date
+        - name: city_from_state
+          in: query
+          schema:
+            type: string
+          description: City state from
+        - name: city_to_state
+          in: query
+          schema:
+            type: string
+          description: City state to
+        - name: city_from_county
+          in: query
+          schema:
+            type: string
+          description: City county from
+        - name: city_to_county
+          in: query
+          schema:
+            type: string
+          description: City county to
+        - name: city_from_lat
+          in: query
+          schema:
+            type: string
+          description: City latitude from
+        - name: city_from_lng
+          in: query
+          schema:
+            type: string
+          description: City longitude from
+        - name: city_to_lat
+          in: query
+          schema:
+            type: string
+          description: City latitude to
+        - name: city_to_lng
+          in: query
+          schema:
+            type: string
+          description: City longitude to
       responses:
         '200':
           description: OK
@@ -67,6 +97,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ride'
+        '400':
+          description: Missing parameter
     post:
       summary: Post new ride
       requestBody:
@@ -222,7 +254,7 @@ paths:
           description: Not authenticated
         '404':
           description: User do not have any ride
-  
+
   /rides/{ride_id}/request:
     post:
       summary: Report a new request to ride
@@ -285,7 +317,7 @@ paths:
           description: Not authenticated
         '404':
           description: Not found pending request
-  
+
   /users/{user_id}:
     get:
         description: Finds a user by id
@@ -361,7 +393,7 @@ paths:
             description: Not authenticated
         '404':
             description: User not found
-  
+
   /vehicles/{car_id}:
     delete:
       summary: Removes car with specified id
@@ -411,7 +443,6 @@ paths:
           description: Not authenticated
         '404':
           description: Ride not found
-
   /notifications/request_confirm/{ride_id}:
     post:
       summary: Send mail with request confirmation
@@ -462,72 +493,8 @@ paths:
               properties:
                 driver_id:
                   type: integer
-                passenger_ids:
-                  type: array
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Some data is missing
-        '401':
-          description: Not authenticated
-        '403':
-          description: User do not have permission
-        '404':
-          description: Ride not found
-
-  /notifications/ride_cancelled/{ride_id}:
-    post:
-      summary: Send mail when ride was cancelled by driver
-      parameters:
-        - name: ride_id
-          description: Ride that was cancelled
-          required: true
-          in: path
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                driver_id:
+                passenger_id:
                   type: integer
-                passenger_ids:
-                  type: array
-      responses:
-        '200':
-          description: OK
-        '400':
-          description: Some data is missing
-        '401':
-          description: Not authenticated
-        '403':
-          description: User do not have permission
-        '404':
-          description: Ride not found
-
-  /notifications/user_resigenation/{ride_id}:
-    post:
-      summary: Send mail when user resigned from participation in ride
-      parameters:
-        - name: ride_id
-          description: Ride that passenger resigned from
-          required: true
-          in: path
-          schema:
-            type: integer
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                driver_id:
-                  type: integer
-                passenger_ids:
-                  type: array
       responses:
         '200':
           description: OK
@@ -597,7 +564,6 @@ paths:
           description: Not authenticated
         '404':
           description: User not found
-
   /reviews/{review_id}:
     delete:
       summary: Delete a review
@@ -687,7 +653,7 @@ components:
               type: string
         vehicle:
           $ref: '#/components/schemas/vehicle'
-    
+
     vehicle:
       type: object
       properties:
@@ -713,7 +679,7 @@ components:
           type: boolean
         reviewer_name:
           type: string
-    
+
     coordinates:
       type: object
       properties:
@@ -723,5 +689,4 @@ components:
           type: number
         sequence_no:
           type: number
-        
-          
+
