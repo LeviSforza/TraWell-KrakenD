@@ -472,7 +472,7 @@
         ]
       },
       {
-        "endpoint": "/notifications/user_resigenation/{ride_id}",
+        "endpoint": "/notifications/user_resignation/{ride_id}",
         "method": "POST",
         "output_encoding": "json",
         "input_headers": ["*"],
@@ -486,7 +486,7 @@
         },
         "backend": [
           {
-            "url_pattern": "/notifications/user_resigenation/{ride_id}",
+            "url_pattern": "/notifications/user_resignation/{ride_id}",
             "encoding": "json",
             "method": "POST",
             "host": [
