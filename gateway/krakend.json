@@ -68,7 +68,7 @@
         "city_to_county",
         "city_to_lat",
         "city_to_lng",
-        "is_ride_private",
+        "ride_type",
         "driver_rate",
         "start_date",
         "seats",

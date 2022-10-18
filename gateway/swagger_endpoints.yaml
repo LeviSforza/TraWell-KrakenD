@@ -14,12 +14,12 @@ paths:
           schema:
             type: integer
           description: Number of page
-        - name: is_ride_private
+        - name: ride_type
           in: query
           required: false
           schema:
-            type: boolean
-          description: Is ride private
+            type: string
+          description: Ride type. Available options -> all, company, private
         - name: driver_rate
           in: query
           required: false
