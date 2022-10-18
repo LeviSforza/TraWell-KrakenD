@@ -10,84 +10,112 @@ paths:
       parameters:
         - name: page
           in: query
+          required: true
           schema:
             type: integer
           description: Number of page
         - name: is_ride_private
           in: query
+          required: false
           schema:
             type: boolean
           description: Is ride private
         - name: driver_rate
           in: query
+          required: false
           schema:
             type: number
           description: Driver ratings greater than
         - name: price_from
           in: query
+          required: false
           schema:
             type: number
           description: Price from
         - name: price_to
           in: query
+          required: false
           schema:
             type: number
           description: Price to
         - name: ordering
           in: query
+          required: false
           schema:
             type: string
           description: Available options -> price, start_date, duration, available_seats
         - name: seats
           in: query
+          required: true
           schema:
             type: number
           description: Seats
         - name: start_date
           in: query
+          required: true
           schema:
             type: string
           description: Start date
         - name: city_from_state
           in: query
+          required: true
           schema:
             type: string
           description: City state from
         - name: city_to_state
           in: query
+          required: true
           schema:
             type: string
           description: City state to
         - name: city_from_county
           in: query
+          required: true
           schema:
             type: string
           description: City county from
         - name: city_to_county
           in: query
+          required: true
           schema:
             type: string
           description: City county to
         - name: city_from_lat
           in: query
+          required: true
           schema:
             type: string
           description: City latitude from
         - name: city_from_lng
           in: query
+          required: true
           schema:
             type: string
           description: City longitude from
         - name: city_to_lat
           in: query
+          required: true
           schema:
             type: string
           description: City latitude to
         - name: city_to_lng
           in: query
+          required: true
           schema:
             type: string
           description: City longitude to
+        - name: city_to
+          in: query
+          required: true
+          schema:
+            type: string
+          description: City to name
+        - name: city_from
+          in: query
+          required: true
+          schema:
+            type: string
+          description: City from name
       responses:
         '200':
           description: OK
@@ -99,6 +127,7 @@ paths:
                   $ref: '#/components/schemas/ride'
         '400':
           description: Missing parameter
+  /rides:
     post:
       summary: Post new ride
       requestBody:
@@ -689,4 +718,3 @@ components:
           type: number
         sequence_no:
           type: number
-
