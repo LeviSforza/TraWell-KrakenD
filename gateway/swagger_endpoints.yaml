@@ -633,9 +633,9 @@ components:
         seats:
           type: integer
         recurrent:
-          type: bool
+          type: boolean
         automatic_confirm:
-          type: bool
+          type: boolean
         available_seats:
           type: integer
         description:
