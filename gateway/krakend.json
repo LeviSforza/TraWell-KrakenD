@@ -168,7 +168,7 @@
     {
       "endpoint": "/user_rides/{user_id}",
       "method": "GET",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -180,9 +180,8 @@
       "backend": [
         {
           "url_pattern": "/user_rides/{user_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "GET",
-          "is_collection": true,
           "host": [
             "host.docker.internal:8001"
           ]
@@ -305,7 +304,7 @@
     {
       "endpoint": "/vehicles/{user_id}",
       "method": "GET",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -317,9 +316,8 @@
       "backend": [
         {
           "url_pattern": "/vehicles/{user_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "GET",
-          "is_collection": true,
           "host": [
             "host.docker.internal:8003"
           ]
@@ -401,7 +399,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/notifications/new_request/{ride_id}",
+          "url_pattern": "/api/notifications/new_request/{ride_id}",
           "encoding": "json",
           "method": "POST",
           "host": [
@@ -430,7 +428,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/notifications/request_confirm/{ride_id}",
+          "url_pattern": "/api/notifications/request_confirm/{ride_id}",
           "encoding": "json",
           "method": "POST",
           "host": [
@@ -459,7 +457,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/notifications/edit_ride/{ride_id}",
+          "url_pattern": "/api/notifications/edit_ride/{ride_id}",
           "encoding": "json",
           "method": "POST",
           "host": [
@@ -488,7 +486,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/notifications/ride_cancelled/{ride_id}",
+          "url_pattern": "/api/notifications/ride_cancelled/{ride_id}",
           "encoding": "json",
           "method": "POST",
           "host": [
@@ -517,7 +515,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/notifications/user_resigenation/{ride_id}",
+          "url_pattern": "/api/notifications/user_resigenation/{ride_id}",
           "encoding": "json",
           "method": "POST",
           "host": [
@@ -532,7 +530,7 @@
     {
       "endpoint": "/reviews/{user_id}",
       "method": "GET",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -544,9 +542,8 @@
       "backend": [
         {
           "url_pattern": "/reviews/{user_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "GET",
-          "is_collection": true,
           "host": [
             "host.docker.internal:8004"
           ]
