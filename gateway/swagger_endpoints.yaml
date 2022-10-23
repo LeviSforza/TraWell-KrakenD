@@ -260,10 +260,10 @@ paths:
         '404':
           description: Ride not found
 
-  /rides/{user_id}/user_rides/:
+  /rides/user_rides/{user_id}:
     get:
-      summary: Find all rides
-      description: Returns user's all rides
+      summary: Find all user future rides
+      description: Returns user's all future rides
       parameters:
         - name: user_id
           required: true
@@ -276,18 +276,6 @@ paths:
           schema:
             type: integer
           description: Number of page
-        - name: price_from
-          in: query
-          required: false
-          schema:
-            type: number
-          description: Price from
-        - name: price_to
-          in: query
-          required: false
-          schema:
-            type: number
-          description: Price to
         - name: ordering
           in: query
           required: false
@@ -368,11 +356,11 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ride'
+                  $ref: '#/components/schemas/ride_personal'
         '401':
           description: Not authenticated
         '404':
-          description: User do not have any ride
+          description: User not found
 
   /rides/{ride_id}/request:
     post:
@@ -783,6 +771,29 @@ components:
               type: integer
         vehicle:
           $ref: '#/components/schemas/vehicle'
+
+    ride_personal:
+      type: object
+      properties:
+        ride_id:
+          type: integer
+        city_from:
+          $ref: '#/components/schemas/city'
+        city_to:
+          $ref: '#/components/schemas/city'
+        area_from:
+          type: string
+        area_to:
+          type: string
+        start_date:
+          type: string
+        duration:
+          type: object
+          properties:
+            hours:
+              type: integer
+            minutes:
+              type: integer
 
     vehicle:
       type: object
