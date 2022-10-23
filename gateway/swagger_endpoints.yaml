@@ -444,58 +444,58 @@ paths:
 
   /users/{user_id}:
     get:
-        description: Finds a user by id
-        parameters:
-          - name: user_id
-            required: true
-            in: path
-            schema:
-              type: integer
-        responses:
-          '200':
-            description: Finds a user by id
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/user'
-          '401':
-            description: Not authenticated
-          '404':
-            description: Ride not found
+      description: Finds a user by id
+      parameters:
+        - name: user_id
+          required: true
+          in: path
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Finds a user by id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        '401':
+          description: Not authenticated
+        '404':
+          description: Ride not found
 
   /vehicles/{user_id}:
     get:
       description: Get all user's vehicles
       parameters:
-          - name: user_id
-            required: true
-            in: path
-            schema:
-              type: array
-              items:
-                  $ref: '#/components/schemas/vehicle'
+        - name: user_id
+          required: true
+          in: path
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/vehicle'
       responses:
         '200':
           description: Returns all user's vehicles
           content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/vehicle'
+              schema:
+                $ref: '#/components/schemas/vehicle'
         '401':
-            description: Not authenticated
+          description: Not authenticated
         '404':
-            description: User not found
+          description: User not found
 
     post:
       description: Add new vehicle for user
       parameters:
-          - name: user_id
-            required: true
-            in: path
-            schema:
-              type: integer
-              items:
-                  $ref: '#/components/schemas/vehicle'
+        - name: user_id
+          required: true
+          in: path
+          schema:
+            type: integer
+            items:
+              $ref: '#/components/schemas/vehicle'
       requestBody:
         content:
           application/json:
@@ -510,13 +510,13 @@ paths:
                   type: string
       responses:
         '200':
-            description: OK
+          description: OK
         '400':
-            description: Some parameters are missing
+          description: Some parameters are missing
         '401':
-            description: Not authenticated
+          description: Not authenticated
         '404':
-            description: User not found
+          description: User not found
 
   /vehicles/{car_id}:
     delete:
@@ -811,6 +811,23 @@ components:
               type: integer
             minutes:
               type: integer
+        driver:
+          type: object
+          properties:
+            user_id:
+              type: integer
+            first_name:
+              type: string
+            last_name:
+              type: string
+            avg_rate:
+              type: string
+            avatar:
+              type: string
+            private:
+              type: boolean
+        can_driver_edit:
+          type: boolean
 
     vehicle:
       type: object
