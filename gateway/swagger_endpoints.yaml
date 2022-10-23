@@ -401,11 +401,15 @@ paths:
             type: integer
       responses:
         '200':
-          description: OK
+          description: Request successfully cancelled
+        '400':
+          description: Missing parameters
         '401':
           description: Not authenticated
         '404':
-          description: Not found pending request
+          description: Request not found
+        '405':
+          description: Request is already cancelled
     post:
       summary: Confirm or reject pending request
       parameters:
