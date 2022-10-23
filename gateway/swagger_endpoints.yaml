@@ -377,7 +377,7 @@ paths:
             schema:
               type: object
               properties:
-                user_id:
+                requestor_id:
                   type: integer
                   description: user requesting to ride
       responses:
@@ -414,19 +414,29 @@ paths:
           in: path
           schema:
             type: integer
-        - name: is_accepted
-          required: true
-          in: query
-          schema:
-            type: integer
-          description: true when request accepted, false when request rejected
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                driver_id:
+                  type: integer
+                  description: Driver responding to request
+                decision:
+                  type: string
+                  description: accepted when request accepted, rejected when request rejected
       responses:
         '200':
-          description: OK
+          description: Request successfully changed
+        '400':
+          description: Missing parameters / Invalid decision parameter value
         '401':
           description: Not authenticated
         '404':
-          description: Not found pending request
+          description: Request not found / User not found
+        '405':
+          description: Request do not have pending status
 
   /users/{user_id}:
     get:
