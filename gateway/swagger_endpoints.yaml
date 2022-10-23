@@ -362,7 +362,7 @@ paths:
         '404':
           description: User not found
 
-  /rides/{ride_id}/request:
+  /rides/{ride_id}/send_request:
     post:
       summary: Report a new request to ride
       parameters:
@@ -371,21 +371,24 @@ paths:
           in: path
           schema:
             type: integer
-        - name: user_id
-          required: true
-          in: query
-          description: User requesting to join a ride
-          schema:
-            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: user requesting to ride
       responses:
         '200':
-          description: OK
+          description: Request successfully sent
         '400':
-          description: Ride does not have empty seats
+          description: User do not fulfill all requirements (many errors, each with his specific message)
         '401':
           description: Not authenticated
         '404':
-          description: Ride not found
+          description: Ride not found / User not found
 
   /rides/request/{request_id}:
     delete:
