@@ -166,7 +166,7 @@
       ]
     },
     {
-      "endpoint": "/user_rides/{user_id}",
+      "endpoint": "/rides/user_rides/{user_id}",
       "method": "GET",
       "output_encoding": "no-op",
       "extra_config": {
@@ -188,11 +188,24 @@
         }
       ],
       "input_query_strings": [
-        "{user_id}"
+        "{user_id}",
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "start_date",
+        "ordering"
       ]
     },
     {
-      "endpoint": "/rides/{ride_id}/request",
+      "endpoint": "/rides/{ride_id}/send_request",
       "method": "POST",
       "output_encoding": "json",
       "input_headers": [

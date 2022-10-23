@@ -260,10 +260,10 @@ paths:
         '404':
           description: Ride not found
 
-  /rides/{user_id}/user_rides/:
+  /rides/user_rides/{user_id}:
     get:
-      summary: Find all rides
-      description: Returns user's all rides
+      summary: Find all user future rides
+      description: Returns user's all future rides
       parameters:
         - name: user_id
           required: true
@@ -276,18 +276,6 @@ paths:
           schema:
             type: integer
           description: Number of page
-        - name: price_from
-          in: query
-          required: false
-          schema:
-            type: number
-          description: Price from
-        - name: price_to
-          in: query
-          required: false
-          schema:
-            type: number
-          description: Price to
         - name: ordering
           in: query
           required: false
@@ -368,13 +356,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ride'
+                  $ref: '#/components/schemas/ride_personal'
         '401':
           description: Not authenticated
         '404':
-          description: User do not have any ride
+          description: User not found
 
-  /rides/{ride_id}/request:
+  /rides/{ride_id}/send_request:
     post:
       summary: Report a new request to ride
       parameters:
@@ -383,21 +371,24 @@ paths:
           in: path
           schema:
             type: integer
-        - name: user_id
-          required: true
-          in: query
-          description: User requesting to join a ride
-          schema:
-            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                requestor_id:
+                  type: integer
+                  description: user requesting to ride
       responses:
         '200':
-          description: OK
+          description: Request successfully sent
         '400':
-          description: Ride does not have empty seats
+          description: User do not fulfill all requirements (many errors, each with his specific message)
         '401':
           description: Not authenticated
         '404':
-          description: Ride not found
+          description: Ride not found / User not found
 
   /rides/request/{request_id}:
     delete:
@@ -410,11 +401,15 @@ paths:
             type: integer
       responses:
         '200':
-          description: OK
+          description: Request successfully cancelled
+        '400':
+          description: Missing parameters
         '401':
           description: Not authenticated
         '404':
-          description: Not found pending request
+          description: Request not found
+        '405':
+          description: Request is already cancelled
     post:
       summary: Confirm or reject pending request
       parameters:
@@ -423,74 +418,84 @@ paths:
           in: path
           schema:
             type: integer
-        - name: is_accepted
-          required: true
-          in: query
-          schema:
-            type: integer
-          description: true when request accepted, false when request rejected
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                driver_id:
+                  type: integer
+                  description: Driver responding to request
+                decision:
+                  type: string
+                  description: accepted when request accepted, rejected when request rejected
       responses:
         '200':
-          description: OK
+          description: Request successfully changed
+        '400':
+          description: Missing parameters / Invalid decision parameter value
         '401':
           description: Not authenticated
         '404':
-          description: Not found pending request
+          description: Request not found / User not found
+        '405':
+          description: Request do not have pending status
 
   /users/{user_id}:
     get:
-        description: Finds a user by id
-        parameters:
-          - name: user_id
-            required: true
-            in: path
-            schema:
-              type: integer
-        responses:
-          '200':
-            description: Finds a user by id
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schemas/user'
-          '401':
-            description: Not authenticated
-          '404':
-            description: Ride not found
+      description: Finds a user by id
+      parameters:
+        - name: user_id
+          required: true
+          in: path
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Finds a user by id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        '401':
+          description: Not authenticated
+        '404':
+          description: Ride not found
 
   /vehicles/{user_id}:
     get:
       description: Get all user's vehicles
       parameters:
-          - name: user_id
-            required: true
-            in: path
-            schema:
-              type: array
-              items:
-                  $ref: '#/components/schemas/vehicle'
+        - name: user_id
+          required: true
+          in: path
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/vehicle'
       responses:
         '200':
           description: Returns all user's vehicles
           content:
             application/json:
-                schema:
-                  $ref: '#/components/schemas/vehicle'
+              schema:
+                $ref: '#/components/schemas/vehicle'
         '401':
-            description: Not authenticated
+          description: Not authenticated
         '404':
-            description: User not found
+          description: User not found
 
     post:
       description: Add new vehicle for user
       parameters:
-          - name: user_id
-            required: true
-            in: path
-            schema:
-              type: integer
-              items:
-                  $ref: '#/components/schemas/vehicle'
+        - name: user_id
+          required: true
+          in: path
+          schema:
+            type: integer
+            items:
+              $ref: '#/components/schemas/vehicle'
       requestBody:
         content:
           application/json:
@@ -505,13 +510,13 @@ paths:
                   type: string
       responses:
         '200':
-            description: OK
+          description: OK
         '400':
-            description: Some parameters are missing
+          description: Some parameters are missing
         '401':
-            description: Not authenticated
+          description: Not authenticated
         '404':
-            description: User not found
+          description: User not found
 
   /vehicles/{car_id}:
     delete:
@@ -783,6 +788,46 @@ components:
               type: integer
         vehicle:
           $ref: '#/components/schemas/vehicle'
+
+    ride_personal:
+      type: object
+      properties:
+        ride_id:
+          type: integer
+        city_from:
+          $ref: '#/components/schemas/city'
+        city_to:
+          $ref: '#/components/schemas/city'
+        area_from:
+          type: string
+        area_to:
+          type: string
+        start_date:
+          type: string
+        duration:
+          type: object
+          properties:
+            hours:
+              type: integer
+            minutes:
+              type: integer
+        driver:
+          type: object
+          properties:
+            user_id:
+              type: integer
+            first_name:
+              type: string
+            last_name:
+              type: string
+            avg_rate:
+              type: string
+            avatar:
+              type: string
+            private:
+              type: boolean
+        can_driver_edit:
+          type: boolean
 
     vehicle:
       type: object
