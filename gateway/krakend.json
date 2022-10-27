@@ -4,7 +4,7 @@
   "name": "TraWell - API Gateway",
   "timeout": "3000ms",
   "cache_ttl": "300s",
-  "output_encoding": "json",
+  "output_encoding": "no-op",
   "port": 9000,
   "endpoints": [
     {
@@ -32,7 +32,7 @@
     {
       "endpoint": "/authenticate",
       "method": "GET",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -44,7 +44,7 @@
       "backend": [
         {
           "url_pattern": "/authenticate",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "GET",
           "host": [
             "host.docker.internal:8003"
@@ -121,7 +121,7 @@
     {
       "endpoint": "/rides/{ride_id}",
       "method": "GET",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -133,7 +133,7 @@
       "backend": [
         {
           "url_pattern": "/rides/{ride_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "GET",
           "host": [
             "host.docker.internal:8001"
@@ -212,7 +212,7 @@
     {
       "endpoint": "/rides/{ride_id}/send_request",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": [
         "*"
       ],
@@ -227,7 +227,7 @@
       "backend": [
         {
           "url_pattern": "/rides/{ride_id}/request",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "POST",
           "host": [
             "host.docker.internal:8001"
@@ -241,7 +241,7 @@
     {
       "endpoint": "/rides/request/{request_id}",
       "method": "DELETE",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -253,7 +253,7 @@
       "backend": [
         {
           "url_pattern": "/rides/request/{request_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "DELETE",
           "host": [
             "host.docker.internal:8001"
@@ -267,7 +267,7 @@
     {
       "endpoint": "/rides/request/{request_id}",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": [
         "*"
       ],
@@ -282,7 +282,7 @@
       "backend": [
         {
           "url_pattern": "/rides/request/{request_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "POST",
           "host": [
             "host.docker.internal:8003"
@@ -296,7 +296,7 @@
     {
       "endpoint": "/users/{user_id}",
       "method": "GET",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -308,7 +308,7 @@
       "backend": [
         {
           "url_pattern": "/users/{user_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "GET",
           "host": [
             "host.docker.internal:8003"
@@ -348,7 +348,7 @@
     {
       "endpoint": "/vehicles/{user_id}",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": [
         "*"
       ],
@@ -363,7 +363,7 @@
       "backend": [
         {
           "url_pattern": "/vehicles/{user_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "POST",
           "host": [
             "host.docker.internal:8003"
@@ -377,7 +377,7 @@
     {
       "endpoint": "/vehicles/{car_id}",
       "method": "DELETE",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -389,7 +389,7 @@
       "backend": [
         {
           "url_pattern": "/vehicles/{car_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "DELETE",
           "host": [
             "host.docker.internal:8003"
@@ -403,7 +403,7 @@
     {
       "endpoint": "/notifications/new_request/{ride_id}",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": [
         "*"
       ],
@@ -418,7 +418,7 @@
       "backend": [
         {
           "url_pattern": "/api/notifications/new_request/{ride_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "POST",
           "host": [
             "host.docker.internal:8005"
@@ -432,7 +432,7 @@
     {
       "endpoint": "/notifications/request_confirm/{ride_id}",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": [
         "*"
       ],
@@ -447,7 +447,7 @@
       "backend": [
         {
           "url_pattern": "/api/notifications/request_confirm/{ride_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "POST",
           "host": [
             "host.docker.internal:8005"
@@ -461,7 +461,7 @@
     {
       "endpoint": "/notifications/edit_ride/{ride_id}",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": [
         "*"
       ],
@@ -476,7 +476,7 @@
       "backend": [
         {
           "url_pattern": "/api/notifications/edit_ride/{ride_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "POST",
           "host": [
             "host.docker.internal:8005"
@@ -490,7 +490,7 @@
     {
       "endpoint": "/notifications/cancelled_info/{ride_id}",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": [
         "*"
       ],
@@ -505,7 +505,7 @@
       "backend": [
         {
           "url_pattern": "/api/notifications/cancelled_info/{ride_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "POST",
           "host": [
             "host.docker.internal:8005"
@@ -519,7 +519,7 @@
     {
       "endpoint": "/notifications/resignation_info/{ride_id}",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": [
         "*"
       ],
@@ -534,7 +534,7 @@
       "backend": [
         {
           "url_pattern": "/api/notifications/resignation_info/{ride_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "POST",
           "host": [
             "host.docker.internal:8005"
@@ -574,7 +574,7 @@
     {
       "endpoint": "/reviews/{user_id}",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": [
         "*"
       ],
@@ -589,7 +589,7 @@
       "backend": [
         {
           "url_pattern": "/reviews/{user_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "POST",
           "host": [
             "host.docker.internal:8004"
@@ -603,7 +603,7 @@
     {
       "endpoint": "/reviews/{review_id}",
       "method": "DELETE",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -615,7 +615,7 @@
       "backend": [
         {
           "url_pattern": "/reviews/{review_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "DELETE",
           "host": [
             "host.docker.internal:8004"
