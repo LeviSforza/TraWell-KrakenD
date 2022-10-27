@@ -88,9 +88,9 @@
       ]
     },
     {
-      "endpoint": "/rides",
+      "endpoint": "/rides/",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": [
         "*"
       ],
@@ -104,8 +104,13 @@
       },
       "backend": [
         {
-          "url_pattern": "/rides",
-          "encoding": "json",
+          "url_pattern": "/rides/",
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "ride_serivce"
+            }
+          },
+          "encoding": "no-op",
           "method": "POST",
           "host": [
             "host.docker.internal:8001"
@@ -140,7 +145,7 @@
       ]
     },
     {
-      "endpoint": "/rides/{ride_id}",
+      "endpoint": "/rides/{ride_id}/",
       "method": "DELETE",
       "output_encoding": "no-op",
       "extra_config": {
@@ -153,7 +158,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/rides/{ride_id}",
+          "url_pattern": "/rides/{ride_id}/",
           "encoding": "no-op",
           "method": "DELETE",
           "host": [
