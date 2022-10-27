@@ -541,7 +541,7 @@ paths:
       summary: Send mail with request confirmation
       parameters:
         - name: ride_id
-          description: Confirmation for specified request
+          description: Ride that passenger wants to join
           required: true
           in: path
           schema:
@@ -556,8 +556,6 @@ paths:
                   type: integer
                 passenger_id:
                   type: integer
-                was_accepted:
-                  type: boolean
       responses:
         '200':
           description: OK
@@ -569,7 +567,7 @@ paths:
           description: Ride not found
   /notifications/request_confirm/{ride_id}:
     post:
-      summary: Send mail with request confirmation
+      summary: Send mail with request confirmation (accepted/rejected)
       parameters:
         - name: ride_id
           description: Confirmation for specified request
@@ -599,12 +597,80 @@ paths:
         '404':
           description: Ride not found
 
-  /notifications/edit_ride/{ride_id}:
+  /notifications/edit_info/{ride_id}:
     post:
-      summary: Send mail when ride was edited
+      summary: Send mail when ride was edited to all passengers
       parameters:
         - name: ride_id
           description: Ride that was edited
+          required: true
+          in: path
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                driver_id:
+                  type: integer
+                passenger_ids:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Some data is missing
+        '401':
+          description: Not authenticated
+        '403':
+          description: User do not have permission
+        '404':
+          description: Ride not found
+   
+    /notifications/cancelled_info/{ride_id}:
+    post:
+      summary: Send mail when ride was cancelled to all passengers
+      parameters:
+        - name: ride_id
+          description: Ride that was cancelled
+          required: true
+          in: path
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                driver_id:
+                  type: integer
+                passenger_ids:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Some data is missing
+        '401':
+          description: Not authenticated
+        '403':
+          description: User do not have permission
+        '404':
+          description: Ride not found
+
+ /notifications/resignation_info/{ride_id}:
+    post:
+      summary: Send mail when passenger resigned from ride
+      parameters:
+        - name: ride_id
+          description: Ride that passenger resigned from
           required: true
           in: path
           schema:
