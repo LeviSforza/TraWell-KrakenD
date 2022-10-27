@@ -483,7 +483,7 @@
       ]
     },
     {
-      "endpoint": "/notifications/ride_cancelled/{ride_id}",
+      "endpoint": "/notifications/cancelled_info/{ride_id}",
       "method": "POST",
       "output_encoding": "json",
       "input_headers": [
@@ -499,7 +499,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/api/notifications/ride_cancelled/{ride_id}",
+          "url_pattern": "/api/notifications/cancelled_info/{ride_id}",
           "encoding": "json",
           "method": "POST",
           "host": [
@@ -512,7 +512,7 @@
       ]
     },
     {
-      "endpoint": "/notifications/user_resigenation/{ride_id}",
+      "endpoint": "/notifications/resignation_info/{ride_id}",
       "method": "POST",
       "output_encoding": "json",
       "input_headers": [
@@ -528,7 +528,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/api/notifications/user_resigenation/{ride_id}",
+          "url_pattern": "/api/notifications/resignation_info/{ride_id}",
           "encoding": "json",
           "method": "POST",
           "host": [
