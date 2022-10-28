@@ -285,12 +285,41 @@
           "encoding": "no-op",
           "method": "POST",
           "host": [
-            "host.docker.internal:8003"
+            "host.docker.internal:8001"
           ]
         }
       ],
       "input_query_strings": [
         "{request_id}"
+      ]
+    },
+    {
+      "endpoint": "/rides/{ride_id}/check_edition_permissions/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/rides/{ride_id}/check_edition_permissions/",
+          "encoding": "no-op",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{ride_id}"
       ]
     },
     {
