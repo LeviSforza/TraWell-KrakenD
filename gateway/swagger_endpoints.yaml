@@ -469,21 +469,22 @@ paths:
       parameters:
         - in: header
           security:
-            bearerAuth:
-              type: http
-              scheme: bearer
-              bearerFormat: JWT
+            - bearerAuth: []
       responses:
         '200':
-          description: Finds a user by id
+          description: Updates user
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/user'
-        '401':
-          description: Not authenticated
-        '404':
-          description: Ride not found
+        '201':
+          description: Adds user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        '400':
+          description: Invalid token or wrong parameters
 
   /vehicles/{user_id}:
     get:
