@@ -119,6 +119,40 @@
       ]
     },
     {
+      "endpoint": "/rides/{ride_id}/",
+      "method": "PATCH",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/rides/{ride_id}/",
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "ride_serivce"
+            }
+          },
+          "encoding": "no-op",
+          "method": "PATCH",
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{ride_id}"
+      ]
+    },
+    {
       "endpoint": "/rides/{ride_id}",
       "method": "GET",
       "output_encoding": "no-op",
@@ -171,7 +205,7 @@
       ]
     },
     {
-      "endpoint": "/rides/user_rides/{user_id}",
+      "endpoint": "/rides/user_rides/",
       "method": "GET",
       "output_encoding": "no-op",
       "extra_config": {
@@ -184,7 +218,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/user_rides/{user_id}",
+          "url_pattern": "/rides/user_rides/",
           "encoding": "no-op",
           "method": "GET",
           "host": [
@@ -193,7 +227,6 @@
         }
       ],
       "input_query_strings": [
-        "{user_id}",
         "page",
         "city_from",
         "city_from_state",
@@ -206,7 +239,8 @@
         "city_to_lat",
         "city_to_lng",
         "start_date",
-        "ordering"
+        "ordering",
+        "user_type"
       ]
     },
     {
@@ -320,6 +354,58 @@
       ],
       "input_query_strings": [
         "{ride_id}"
+      ]
+    },
+    {
+      "endpoint": "/rides/my_requests/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/rides/my_requests/",
+          "encoding": "no-op",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/rides/pending_requests/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/rides/pending_requests/",
+          "encoding": "no-op",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
       ]
     },
     {
