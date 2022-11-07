@@ -1,0 +1,107 @@
+body, html {
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+.login-pf-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+.login-pf body {
+  background: #F6F8FA;
+}
+
+.login-pf-page-header {
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.container-fluid-custom {
+  border: 1px;
+}
+
+input, select {
+  border-radius: 10px !important;
+}
+
+.card-pf {  
+  background-color: #06283D;
+  border-radius: 20px;
+  padding: 20px 60px 30px 60px !important;
+  width: 80%;
+  max-width: 700px;
+}
+
+span.fa.fa-fw.fa-exclamation-circle {
+  color: #06283D;
+}
+
+.form-group div:nth-child(1) {
+  color: #F6F8FA;
+}
+
+.card-pf header div div:nth-child(2) {
+  width: 100%;
+}
+
+#kc-page-title, .checkbox label, h4, span, #header-social_media, #kc-info-wrapper, .pf-c-form__label.pf-c-form__label-text {
+  color: #F6F8FA;
+}
+
+ul.pf-c-login__main-footer-links.kc-social-links {
+  background-color: #F6F8FA;
+}
+
+#kc-form-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#kc-form-buttons input {
+  border-radius: 1px;
+  padding: 8px 15px;
+}
+
+#kc-login {
+  width: auto;
+}
+
+input.pf-c-button.pf-m-primary.pf-m-block.btn-lg {
+  width: auto;
+}
+
+#header-social_media {
+  padding: 0 20px;
+}
+
+ul.pf-c-login__main-footer-links.kc-social-links {
+  width: auto;
+}
+
+ul.pf-c-login__main-footer-links.kc-social-links a span {
+  color: #06283D;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+#input-error, #input-error-password, #input-error-email, #input-error-password-confirm, #input-error-firstName, #input-error-lastName, #input-error-date_of_birth, #input-error-user_type {
+  color: #c9190b;
+}
+
+@media screen and (max-width: 600px) {
+  .login-pf-page-header {
+    font-size: 25px;
+  }
+
+  .card-pf {
+      padding: 20px 40px 30px 40px !important;
+      width: 90%;
+  }
+}
