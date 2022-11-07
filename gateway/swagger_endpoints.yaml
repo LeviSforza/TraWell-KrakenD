@@ -463,6 +463,29 @@ paths:
         '404':
           description: Ride not found
 
+  /users/check_user:
+    get:
+      description: Adds new user or if exists, updates values
+      parameters:
+        - in: header
+          security:
+            - bearerAuth: []
+      responses:
+        '200':
+          description: Updates user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        '201':
+          description: Adds user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/user'
+        '400':
+          description: Invalid token or wrong parameters
+
   /vehicles/{user_id}:
     get:
       description: Get all user's vehicles
@@ -930,3 +953,9 @@ components:
           type: number
         sequence_no:
           type: number
+
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
