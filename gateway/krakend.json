@@ -412,6 +412,9 @@
       "endpoint": "/users/{user_id}",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -435,9 +438,12 @@
       ]
     },
     {
-      "endpoint": "/vehicles/{user_id}",
-      "method": "GET",
+      "endpoint": "/users/{user_id}",
+      "method": "PATCH",
       "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -448,7 +454,88 @@
       },
       "backend": [
         {
-          "url_pattern": "/vehicles/{user_id}",
+          "url_pattern": "/users/{user_id}",
+          "encoding": "no-op",
+          "method": "PATCH",
+          "host": [
+            "host.docker.internal:8003"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{user_id}"
+      ]
+    },
+    {
+      "endpoint": "/users/me",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/users/me",
+          "encoding": "no-op",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:8003"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/users/check_user",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/users/check_user",
+          "encoding": "no-op",
+          "method": "GET",
+          "host": [
+            "host.docker.internal:8003"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/vehicles/user_vehicles/{user_id}",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/vehicles/user_vehicles/{user_id}",
           "encoding": "no-op",
           "method": "GET",
           "host": [
@@ -461,7 +548,7 @@
       ]
     },
     {
-      "endpoint": "/vehicles/{user_id}",
+      "endpoint": "/vehicles/user_vehicles/{user_id}",
       "method": "POST",
       "output_encoding": "no-op",
       "input_headers": [
@@ -477,7 +564,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/vehicles/{user_id}",
+          "url_pattern": "/vehicles/user_vehicles/{user_id}",
           "encoding": "no-op",
           "method": "POST",
           "host": [
@@ -493,6 +580,9 @@
       "endpoint": "/vehicles/{car_id}",
       "method": "DELETE",
       "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -506,6 +596,35 @@
           "url_pattern": "/vehicles/{car_id}",
           "encoding": "no-op",
           "method": "DELETE",
+          "host": [
+            "host.docker.internal:8003"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{car_id}"
+      ]
+    },
+    {
+      "endpoint": "/vehicles/{car_id}",
+      "method": "PATCH",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/vehicles/{car_id}",
+          "encoding": "no-op",
+          "method": "PATCH",
           "host": [
             "host.docker.internal:8003"
           ]
@@ -661,9 +780,12 @@
       ]
     },
     {
-      "endpoint": "/reviews/{user_id}",
+      "endpoint": "/reviews/user_reviews/{user_id}",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -674,7 +796,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/reviews/{user_id}",
+          "url_pattern": "/reviews/user_reviews/{user_id}",
           "encoding": "no-op",
           "method": "GET",
           "host": [
@@ -683,11 +805,13 @@
         }
       ],
       "input_query_strings": [
-        "{user_id}"
+        "{user_id}",
+        "{user_type}",
+        "{rating_order}"
       ]
     },
     {
-      "endpoint": "/reviews/{user_id}",
+      "endpoint": "/reviews/user_reviews/{user_id}",
       "method": "POST",
       "output_encoding": "no-op",
       "input_headers": [
@@ -703,7 +827,7 @@
       },
       "backend": [
         {
-          "url_pattern": "/reviews/{user_id}",
+          "url_pattern": "/reviews/user_reviews/{user_id}",
           "encoding": "no-op",
           "method": "POST",
           "host": [
@@ -719,6 +843,9 @@
       "endpoint": "/reviews/{review_id}",
       "method": "DELETE",
       "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
