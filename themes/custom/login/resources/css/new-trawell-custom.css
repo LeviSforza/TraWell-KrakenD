@@ -91,7 +91,7 @@ ul.pf-c-login__main-footer-links.kc-social-links a span {
   margin-bottom: 20px;
 }
 
-#input-error, #input-error-password, #input-error-email, #input-error-password-confirm, #input-error-firstName, #input-error-lastName, #input-error-date_of_birth, #input-error-user_type {
+#input-error, #input-error-isprivate, #input-error-password, #input-error-email, #input-error-password-confirm, #input-error-firstName, #input-error-lastName, #input-error-date_of_birth, #input-error-user_type {
   color: #c9190b;
 }
 
