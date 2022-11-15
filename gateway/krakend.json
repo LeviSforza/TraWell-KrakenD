@@ -2,10 +2,10 @@
   "$schema": "https://www.krakend.io/schema/v3.json",
   "version": 3,
   "name": "TraWell - API Gateway",
+  "port": 9000,
   "timeout": "3000ms",
   "cache_ttl": "300s",
   "output_encoding": "no-op",
-
   "extra_config": {
     "security/cors": {
       "allow_origins": [
@@ -23,16 +23,8 @@
       "max_age": "12h",
       "allow_credentials": true,
       "debug": false
-    },
-    "github.com/devopsfaith/krakend-martian": {
-      "header.Blacklist": {
-          "scope": ["response"],
-          "names": ["Access-Control-Allow-Origin"]
-      }
-   }
+    }
   },
-
-  "port": 9000,
   "endpoints": [
     {
       "endpoint": "/keycloak-protected",
