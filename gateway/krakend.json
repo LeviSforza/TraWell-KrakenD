@@ -5,6 +5,33 @@
   "timeout": "3000ms",
   "cache_ttl": "300s",
   "output_encoding": "no-op",
+
+  "extra_config": {
+    "security/cors": {
+      "allow_origins": [
+        "http*"
+      ],
+      "allow_methods": [
+        "GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"
+      ],
+      "expose_headers": [
+        "*"
+      ],
+      "allow_headers": [
+        "*"
+      ],
+      "max_age": "12h",
+      "allow_credentials": true,
+      "debug": false
+    },
+    "github.com/devopsfaith/krakend-martian": {
+      "header.Blacklist": {
+          "scope": ["response"],
+          "names": ["Access-Control-Allow-Origin"]
+      }
+   }
+  },
+
   "port": 9000,
   "endpoints": [
     {
@@ -23,6 +50,14 @@
         {
           "url_pattern": "/__health",
           "encoding": "no-op",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:9000"
           ]
@@ -46,6 +81,14 @@
           "url_pattern": "/authenticate",
           "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -81,6 +124,14 @@
           "url_pattern": "/rides/get_filtered/",
           "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -112,6 +163,14 @@
           },
           "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -143,6 +202,14 @@
           },
           "encoding": "no-op",
           "method": "PATCH",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -169,6 +236,14 @@
           "url_pattern": "/rides/{ride_id}",
           "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -195,6 +270,14 @@
           "url_pattern": "/rides/{ride_id}/",
           "encoding": "no-op",
           "method": "DELETE",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -221,6 +304,14 @@
           "url_pattern": "/rides/user_rides/",
           "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -263,6 +354,14 @@
           "url_pattern": "/rides/{ride_id}/request",
           "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -289,6 +388,14 @@
           "url_pattern": "/rides/request/{request_id}",
           "encoding": "no-op",
           "method": "DELETE",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -318,6 +425,14 @@
           "url_pattern": "/rides/request/{request_id}",
           "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -347,6 +462,14 @@
           "url_pattern": "/rides/{ride_id}/check_edition_permissions/",
           "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -376,6 +499,14 @@
           "url_pattern": "/rides/my_requests/",
           "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -402,6 +533,14 @@
           "url_pattern": "/rides/pending_requests/",
           "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -428,6 +567,14 @@
           "url_pattern": "/users/{user_id}",
           "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -457,6 +604,14 @@
           "url_pattern": "/users/{user_id}",
           "encoding": "no-op",
           "method": "PATCH",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -486,6 +641,14 @@
           "url_pattern": "/users/me",
           "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -512,6 +675,14 @@
           "url_pattern": "/users/check_user",
           "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -538,6 +709,14 @@
           "url_pattern": "/vehicles/user_vehicles/{user_id}",
           "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -567,6 +746,14 @@
           "url_pattern": "/vehicles/user_vehicles/{user_id}",
           "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -596,6 +783,14 @@
           "url_pattern": "/vehicles/{car_id}",
           "encoding": "no-op",
           "method": "DELETE",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -625,6 +820,14 @@
           "url_pattern": "/vehicles/{car_id}",
           "encoding": "no-op",
           "method": "PATCH",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -654,6 +857,14 @@
           "url_pattern": "/api/notifications/new_request/{ride_id}",
           "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8005"
           ]
@@ -683,6 +894,14 @@
           "url_pattern": "/api/notifications/request_confirm/{ride_id}",
           "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8005"
           ]
@@ -712,6 +931,14 @@
           "url_pattern": "/api/notifications/edit_ride/{ride_id}",
           "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8005"
           ]
@@ -741,6 +968,14 @@
           "url_pattern": "/api/notifications/cancelled_info/{ride_id}",
           "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8005"
           ]
@@ -770,6 +1005,14 @@
           "url_pattern": "/api/notifications/resignation_info/{ride_id}",
           "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8005"
           ]
@@ -799,6 +1042,14 @@
           "url_pattern": "/reviews/user_reviews/{user_id}",
           "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8004"
           ]
@@ -806,8 +1057,7 @@
       ],
       "input_query_strings": [
         "{user_id}",
-        "{user_type}",
-        "{rating_order}"
+        "*"
       ]
     },
     {
@@ -830,6 +1080,14 @@
           "url_pattern": "/reviews/user_reviews/{user_id}",
           "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8004"
           ]
@@ -859,6 +1117,14 @@
           "url_pattern": "/reviews/{review_id}",
           "encoding": "no-op",
           "method": "DELETE",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8004"
           ]

@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  krakend:
+      image: devopsfaith/krakend:latest
+      container_name: krakend
+      command: run -d -c /etc/krakend/krakend.json
+      ports:
+        - "9000:9000"
+      volumes:
+        - .:/etc/krakend
