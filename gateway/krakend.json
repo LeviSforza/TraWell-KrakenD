@@ -1049,7 +1049,12 @@
       ],
       "input_query_strings": [
         "{user_id}",
-        "*"
+        "{user_type}",
+        "{rating_order}",
+        "{page}",
+        "{page_size}",
+        "{rating_from}",
+        "{rating_to}"
       ]
     },
     {
@@ -1124,6 +1129,43 @@
       ],
       "input_query_strings": [
         "{review_id}"
+      ]
+    },
+    {
+      "endpoint": "/rides/{user_id}",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/rides/{user_id}",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": ["response"],
+                "names": ["Access-Control-Allow-Origin"]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8004"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{user_id}"
       ]
     }
   ]
