@@ -12,7 +12,13 @@
         "http*"
       ],
       "allow_methods": [
-        "GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"
+        "GET",
+        "HEAD",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE",
+        "OPTIONS"
       ],
       "expose_headers": [
         "*"
@@ -45,8 +51,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -76,8 +86,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -119,8 +133,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -158,8 +176,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -197,8 +219,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -212,7 +238,7 @@
       ]
     },
     {
-      "endpoint": "/rides/{ride_id}",
+      "endpoint": "/rides/{ride_id}/",
       "method": "GET",
       "output_encoding": "no-op",
       "extra_config": {
@@ -225,14 +251,18 @@
       },
       "backend": [
         {
-          "url_pattern": "/rides/{ride_id}",
+          "url_pattern": "/rides/{ride_id}/",
           "encoding": "no-op",
           "method": "GET",
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -265,8 +295,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -283,6 +317,27 @@
       "endpoint": "/rides/user_rides/",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "ride_type",
+        "driver_rate",
+        "start_date",
+        "seats",
+        "price_from",
+        "price_to",
+        "ordering",
+        "user_type"
+      ],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -299,8 +354,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -308,139 +367,12 @@
             "host.docker.internal:8001"
           ]
         }
-      ],
-      "input_query_strings": [
-        "page",
-        "city_from",
-        "city_from_state",
-        "city_from_county",
-        "city_from_lat",
-        "city_from_lng",
-        "city_to",
-        "city_to_state",
-        "city_to_county",
-        "city_to_lat",
-        "city_to_lng",
-        "start_date",
-        "ordering",
-        "user_type"
-      ]
-    },
-    {
-      "endpoint": "/rides/{ride_id}/send_request",
-      "method": "POST",
-      "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
-      "extra_config": {
-        "auth/validator": {
-          "alg": "RS256",
-          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-          "issuer": "http://localhost:8403/auth/realms/TraWell",
-          "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/rides/{ride_id}/request",
-          "encoding": "no-op",
-          "method": "POST",
-          "extra_config": {
-            "github.com/devopsfaith/krakend-martian": {
-              "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
-              }
-            }
-          },
-          "host": [
-            "host.docker.internal:8001"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{ride_id}"
-      ]
-    },
-    {
-      "endpoint": "/rides/request/{request_id}",
-      "method": "DELETE",
-      "output_encoding": "no-op",
-      "extra_config": {
-        "auth/validator": {
-          "alg": "RS256",
-          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-          "issuer": "http://localhost:8403/auth/realms/TraWell",
-          "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/rides/request/{request_id}",
-          "encoding": "no-op",
-          "method": "DELETE",
-          "extra_config": {
-            "github.com/devopsfaith/krakend-martian": {
-              "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
-              }
-            }
-          },
-          "host": [
-            "host.docker.internal:8001"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{request_id}"
-      ]
-    },
-    {
-      "endpoint": "/rides/request/{request_id}",
-      "method": "POST",
-      "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
-      "extra_config": {
-        "auth/validator": {
-          "alg": "RS256",
-          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-          "issuer": "http://localhost:8403/auth/realms/TraWell",
-          "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/rides/request/{request_id}",
-          "encoding": "no-op",
-          "method": "POST",
-          "extra_config": {
-            "github.com/devopsfaith/krakend-martian": {
-              "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
-              }
-            }
-          },
-          "host": [
-            "host.docker.internal:8001"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{request_id}"
       ]
     },
     {
       "endpoint": "/rides/{ride_id}/check_edition_permissions/",
       "method": "GET",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -457,8 +389,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -472,8 +408,8 @@
       ]
     },
     {
-      "endpoint": "/rides/my_requests/",
-      "method": "GET",
+      "endpoint": "/recurrent_rides/",
+      "method": "POST",
       "output_encoding": "no-op",
       "input_headers": [
         "*"
@@ -488,14 +424,23 @@
       },
       "backend": [
         {
-          "url_pattern": "/rides/my_requests/",
+          "url_pattern": "/recurrent_rides/",
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "ride_service"
+            }
+          },
           "encoding": "no-op",
-          "method": "GET",
+          "method": "POST",
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -506,8 +451,8 @@
       ]
     },
     {
-      "endpoint": "/rides/pending_requests/",
-      "method": "GET",
+      "endpoint": "/recurrent_rides/{ride_id}/",
+      "method": "PATCH",
       "output_encoding": "no-op",
       "input_headers": [
         "*"
@@ -522,14 +467,494 @@
       },
       "backend": [
         {
-          "url_pattern": "/rides/pending_requests/",
+          "url_pattern": "/recurrent_rides/{ride_id}/",
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "ride_serivce"
+            }
+          },
+          "encoding": "no-op",
+          "method": "PATCH",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{ride_id}"
+      ]
+    },
+    {
+      "endpoint": "/recurrent_rides/{ride_id}/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/recurrent_rides/{ride_id}/",
           "encoding": "no-op",
           "method": "GET",
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{ride_id}"
+      ]
+    },
+    {
+      "endpoint": "/recurrent_rides/{ride_id}/",
+      "method": "DELETE",
+      "output_encoding": "no-op",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/recurrent_rides/{ride_id}/",
+          "encoding": "no-op",
+          "method": "DELETE",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{ride_id}"
+      ]
+    },
+    {
+      "endpoint": "/recurrent_rides/user_rides/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "ride_type",
+        "driver_rate",
+        "start_date",
+        "seats",
+        "price_from",
+        "price_to",
+        "ordering",
+        "user_type"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/recurrent_rides/user_rides/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/requests/",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/requests/",
+          "encoding": "no-op",
+          "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/requests/{request_id}/",
+      "method": "DELETE",
+      "output_encoding": "no-op",
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/requests/{request_id}/",
+          "encoding": "no-op",
+          "method": "DELETE",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{request_id}"
+      ]
+    },
+    {
+      "endpoint": "/requests/{request_id}/decision/",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/requests/{request_id}/decision/",
+          "encoding": "no-op",
+          "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{request_id}"
+      ]
+    },
+    {
+      "endpoint": "/requests/my_requests/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "start_date",
+        "ordering",
+        "decision"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/requests/my_requests/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/requests/pending_requests/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "start_date",
+        "ordering",
+        "decision"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/requests/pending_requests/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/history_rides/user_rides/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "ride_type",
+        "driver_rate",
+        "start_date",
+        "seats",
+        "price_from",
+        "price_to",
+        "ordering",
+        "user_type"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/history_rides/user_rides/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/history_recurrent_rides/user_rides/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "ride_type",
+        "driver_rate",
+        "start_date",
+        "seats",
+        "price_from",
+        "price_to",
+        "ordering"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/history_recurrent_rides/user_rides/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -562,8 +987,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -599,8 +1028,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -636,8 +1069,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -670,8 +1107,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -704,8 +1145,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -741,8 +1186,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -778,8 +1227,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -815,8 +1268,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -852,8 +1309,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -889,8 +1350,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -926,8 +1391,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -963,8 +1432,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -1000,8 +1473,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -1037,8 +1514,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -1080,8 +1561,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -1117,8 +1602,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
@@ -1154,8 +1643,12 @@
           "extra_config": {
             "github.com/devopsfaith/krakend-martian": {
               "header.Blacklist": {
-                "scope": ["response"],
-                "names": ["Access-Control-Allow-Origin"]
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
               }
             }
           },
