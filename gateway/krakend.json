@@ -198,6 +198,7 @@
       "input_headers": [
         "*"
       ],
+      "input_query_strings": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -338,6 +339,7 @@
         "ordering",
         "user_type"
       ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -576,6 +578,7 @@
       "endpoint": "/recurrent_rides/user_rides/",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "input_query_strings": [
         "page",
         "city_from",
@@ -857,6 +860,7 @@
       "endpoint": "/history_rides/user_rides/",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "input_query_strings": [
         "page",
         "city_from",
