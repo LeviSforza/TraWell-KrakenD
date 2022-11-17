@@ -35,6 +35,7 @@
     {
       "endpoint": "/keycloak-protected",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -70,6 +71,7 @@
       "endpoint": "/authenticate",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -105,6 +107,7 @@
       "endpoint": "/rides/get_filtered/",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "input_query_strings": [
         "page",
         "city_from",
@@ -152,9 +155,7 @@
       "endpoint": "/rides/",
       "method": "POST",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -195,9 +196,8 @@
       "endpoint": "/rides/{ride_id}/",
       "method": "PATCH",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
+      "input_query_strings": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -241,6 +241,7 @@
       "endpoint": "/rides/{ride_id}/",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -279,6 +280,7 @@
       "endpoint": "/rides/{ride_id}/",
       "method": "DELETE",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -317,6 +319,7 @@
       "endpoint": "/rides/user_rides/",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "input_query_strings": [
         "page",
         "city_from",
@@ -373,6 +376,7 @@
       "endpoint": "/rides/{ride_id}/check_edition_permissions/",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -411,9 +415,7 @@
       "endpoint": "/recurrent_rides/",
       "method": "POST",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -454,9 +456,7 @@
       "endpoint": "/recurrent_rides/{ride_id}/",
       "method": "PATCH",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -500,6 +500,7 @@
       "endpoint": "/recurrent_rides/{ride_id}/",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -538,6 +539,7 @@
       "endpoint": "/recurrent_rides/{ride_id}/",
       "method": "DELETE",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -576,6 +578,7 @@
       "endpoint": "/recurrent_rides/user_rides/",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "input_query_strings": [
         "page",
         "city_from",
@@ -632,9 +635,7 @@
       "endpoint": "/requests/",
       "method": "POST",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -670,6 +671,7 @@
       "endpoint": "/requests/{request_id}/",
       "method": "DELETE",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -708,9 +710,7 @@
       "endpoint": "/requests/{request_id}/decision/",
       "method": "POST",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -749,9 +749,7 @@
       "endpoint": "/requests/my_requests/",
       "method": "GET",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "input_query_strings": [
         "page",
         "city_from",
@@ -803,9 +801,7 @@
       "endpoint": "/requests/pending_requests/",
       "method": "GET",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "input_query_strings": [
         "page",
         "city_from",
@@ -857,6 +853,7 @@
       "endpoint": "/history_rides/user_rides/",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "input_query_strings": [
         "page",
         "city_from",
@@ -913,6 +910,7 @@
       "endpoint": "/history_recurrent_rides/user_rides/",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "input_query_strings": [
         "page",
         "city_from",
@@ -968,9 +966,7 @@
       "endpoint": "/users/{user_id}",
       "method": "GET",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -1009,9 +1005,7 @@
       "endpoint": "/users/{user_id}",
       "method": "PATCH",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -1050,9 +1044,7 @@
       "endpoint": "/users/me",
       "method": "GET",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -1088,9 +1080,7 @@
       "endpoint": "/users/check_user",
       "method": "GET",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -1126,9 +1116,7 @@
       "endpoint": "/vehicles/user_vehicles/{user_id}",
       "method": "GET",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -1167,9 +1155,7 @@
       "endpoint": "/vehicles/user_vehicles/{user_id}",
       "method": "POST",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -1208,9 +1194,7 @@
       "endpoint": "/vehicles/{car_id}",
       "method": "DELETE",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -1249,9 +1233,7 @@
       "endpoint": "/vehicles/{car_id}",
       "method": "PATCH",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -1287,217 +1269,10 @@
       ]
     },
     {
-      "endpoint": "/notifications/new_request/{ride_id}",
-      "method": "POST",
-      "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
-      "extra_config": {
-        "auth/validator": {
-          "alg": "RS256",
-          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-          "issuer": "http://localhost:8403/auth/realms/TraWell",
-          "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/api/notifications/new_request/{ride_id}",
-          "encoding": "no-op",
-          "method": "POST",
-          "extra_config": {
-            "github.com/devopsfaith/krakend-martian": {
-              "header.Blacklist": {
-                "scope": [
-                  "response"
-                ],
-                "names": [
-                  "Access-Control-Allow-Origin"
-                ]
-              }
-            }
-          },
-          "host": [
-            "host.docker.internal:8005"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{ride_id}"
-      ]
-    },
-    {
-      "endpoint": "/notifications/request_confirm/{ride_id}",
-      "method": "POST",
-      "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
-      "extra_config": {
-        "auth/validator": {
-          "alg": "RS256",
-          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-          "issuer": "http://localhost:8403/auth/realms/TraWell",
-          "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/api/notifications/request_confirm/{ride_id}",
-          "encoding": "no-op",
-          "method": "POST",
-          "extra_config": {
-            "github.com/devopsfaith/krakend-martian": {
-              "header.Blacklist": {
-                "scope": [
-                  "response"
-                ],
-                "names": [
-                  "Access-Control-Allow-Origin"
-                ]
-              }
-            }
-          },
-          "host": [
-            "host.docker.internal:8005"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{ride_id}"
-      ]
-    },
-    {
-      "endpoint": "/notifications/edit_ride/{ride_id}",
-      "method": "POST",
-      "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
-      "extra_config": {
-        "auth/validator": {
-          "alg": "RS256",
-          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-          "issuer": "http://localhost:8403/auth/realms/TraWell",
-          "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/api/notifications/edit_ride/{ride_id}",
-          "encoding": "no-op",
-          "method": "POST",
-          "extra_config": {
-            "github.com/devopsfaith/krakend-martian": {
-              "header.Blacklist": {
-                "scope": [
-                  "response"
-                ],
-                "names": [
-                  "Access-Control-Allow-Origin"
-                ]
-              }
-            }
-          },
-          "host": [
-            "host.docker.internal:8005"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{ride_id}"
-      ]
-    },
-    {
-      "endpoint": "/notifications/cancelled_info/{ride_id}",
-      "method": "POST",
-      "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
-      "extra_config": {
-        "auth/validator": {
-          "alg": "RS256",
-          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-          "issuer": "http://localhost:8403/auth/realms/TraWell",
-          "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/api/notifications/cancelled_info/{ride_id}",
-          "encoding": "no-op",
-          "method": "POST",
-          "extra_config": {
-            "github.com/devopsfaith/krakend-martian": {
-              "header.Blacklist": {
-                "scope": [
-                  "response"
-                ],
-                "names": [
-                  "Access-Control-Allow-Origin"
-                ]
-              }
-            }
-          },
-          "host": [
-            "host.docker.internal:8005"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{ride_id}"
-      ]
-    },
-    {
-      "endpoint": "/notifications/resignation_info/{ride_id}",
-      "method": "POST",
-      "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
-      "extra_config": {
-        "auth/validator": {
-          "alg": "RS256",
-          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-          "issuer": "http://localhost:8403/auth/realms/TraWell",
-          "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/api/notifications/resignation_info/{ride_id}",
-          "encoding": "no-op",
-          "method": "POST",
-          "extra_config": {
-            "github.com/devopsfaith/krakend-martian": {
-              "header.Blacklist": {
-                "scope": [
-                  "response"
-                ],
-                "names": [
-                  "Access-Control-Allow-Origin"
-                ]
-              }
-            }
-          },
-          "host": [
-            "host.docker.internal:8005"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{ride_id}"
-      ]
-    },
-    {
       "endpoint": "/reviews/user_reviews/{user_id}",
       "method": "GET",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -1542,9 +1317,7 @@
       "endpoint": "/reviews/user_reviews/{user_id}",
       "method": "POST",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
@@ -1583,9 +1356,7 @@
       "endpoint": "/reviews/{review_id}",
       "method": "DELETE",
       "output_encoding": "no-op",
-      "input_headers": [
-        "*"
-      ],
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
           "alg": "RS256",
