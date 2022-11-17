@@ -917,6 +917,7 @@
       "endpoint": "/history_recurrent_rides/user_rides/",
       "method": "GET",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "input_query_strings": [
         "page",
         "city_from",
