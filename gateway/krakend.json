@@ -591,7 +591,8 @@
         }
       ],
       "input_query_strings": [
-        "{ride_id}"
+        "{ride_id}",
+        "single_start_date"
       ]
     },
     {
@@ -1077,7 +1078,8 @@
         }
       ],
       "input_query_strings": [
-        "{ride_id}"
+        "{ride_id}",
+        "single_start_date"
       ]
     },
     {
