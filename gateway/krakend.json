@@ -554,6 +554,47 @@
       ]
     },
     {
+      "endpoint": "/recurrent_rides/{ride_id}/single_rides/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/recurrent_rides/{ride_id}/single_rides/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{ride_id}"
+      ]
+    },
+    {
       "endpoint": "/recurrent_rides/{ride_id}/",
       "method": "DELETE",
       "output_encoding": "no-op",
@@ -996,6 +1037,47 @@
             "host.docker.internal:8002"
           ]
         }
+      ]
+    },
+    {
+      "endpoint": "/history_recurrent_rides/{ride_id}/single_rides/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": [
+        "*"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://localhost:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/history_recurrent_rides/{ride_id}/single_rides/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{ride_id}"
       ]
     },
     {
