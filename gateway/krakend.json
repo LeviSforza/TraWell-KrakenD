@@ -1071,7 +1071,7 @@
             }
           },
           "host": [
-            "http://localhost:8003"
+            "http://trawell-rabbitmq_web_users_1:8003"
           ]
         }
       ]
