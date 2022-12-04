@@ -2,48 +2,101 @@
   "$schema": "https://www.krakend.io/schema/v3.json",
   "version": 3,
   "name": "TraWell - API Gateway",
+  "port": 9000,
   "timeout": "3000ms",
   "cache_ttl": "300s",
-  "output_encoding": "json",
-  "port": 9000,
+  "output_encoding": "no-op",
+  "extra_config": {
+    "security/cors": {
+      "allow_origins": [
+        "http*"
+      ],
+      "allow_methods": [
+        "GET",
+        "HEAD",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE",
+        "OPTIONS"
+      ],
+      "expose_headers": [
+        "*"
+      ],
+      "allow_headers": [
+        "*"
+      ],
+      "max_age": "12h",
+      "allow_credentials": true,
+      "debug": false
+    }
+  },
   "endpoints": [
     {
       "endpoint": "/keycloak-protected",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
-          "auth/validator": {
-              "alg": "RS256",
-              "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-              "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-              "disable_jwk_security": true,
-              "cache": true
-          }
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true,
+          "cache": true
+        }
       },
       "backend": [
-          {
-            "url_pattern": "/__health",
-            "encoding": "no-op",
-            "host":["host.docker.internal:9000"]
-          }
+        {
+          "url_pattern": "/__health",
+          "encoding": "no-op",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:9000"
+          ]
+        }
       ]
     },
     {
       "endpoint": "/authenticate",
       "method": "GET",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
           "url_pattern": "/authenticate",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -51,23 +104,47 @@
       ]
     },
     {
-      "endpoint": "/rides",
+      "endpoint": "/rides/get_filtered/",
       "method": "GET",
-      "output_encoding": "json",
-      "extra_config": {
-        "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
-        }
-      },
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "ride_type",
+        "driver_rate",
+        "start_date",
+        "seats",
+        "price_from",
+        "price_to",
+        "ordering"
+      ],
       "backend": [
         {
-          "url_pattern": "/rides",
-          "encoding": "json",
+          "url_pattern": "/rides/get_filtered/",
+          "encoding": "no-op",
           "method": "GET",
-          "is_collection": true,
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -75,23 +152,40 @@
       ]
     },
     {
-      "endpoint": "/rides",
+      "endpoint": "/rides/",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
-          "url_pattern": "/rides",
-          "encoding": "json",
+          "url_pattern": "/rides/",
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "ride_serivce"
+            }
+          },
+          "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -99,22 +193,41 @@
       ]
     },
     {
-      "endpoint": "/rides/{ride_id}",
-      "method": "GET",
-      "output_encoding": "json",
+      "endpoint": "/rides/{ride_id}/",
+      "method": "PATCH",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "input_query_strings": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
-          "url_pattern": "/rides/{ride_id}",
-          "encoding": "json",
-          "method": "GET",
+          "url_pattern": "/rides/{ride_id}/",
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "ride_serivce"
+            }
+          },
+          "encoding": "no-op",
+          "method": "PATCH",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -125,22 +238,74 @@
       ]
     },
     {
-      "endpoint": "/rides/{ride_id}",
+      "endpoint": "/rides/{ride_id}/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/rides/{ride_id}/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{ride_id}"
+      ]
+    },
+    {
+      "endpoint": "/rides/{ride_id}/",
       "method": "DELETE",
       "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
-          "url_pattern": "/rides/{ride_id}",
+          "url_pattern": "/rides/{ride_id}/",
           "encoding": "no-op",
           "method": "DELETE",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -151,50 +316,92 @@
       ]
     },
     {
-      "endpoint": "/user_rides/{user_id}",
+      "endpoint": "/rides/user_rides/",
       "method": "GET",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "ride_type",
+        "driver_rate",
+        "start_date",
+        "seats",
+        "price_from",
+        "price_to",
+        "ordering",
+        "user_type"
+      ],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
-          "url_pattern": "/user_rides/{user_id}",
-          "encoding": "json",
+          "url_pattern": "/rides/user_rides/",
+          "encoding": "no-op",
           "method": "GET",
-          "is_collection": true,
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
         }
-      ],
-      "input_query_strings": [
-        "{user_id}"
       ]
     },
     {
-      "endpoint": "/rides/{ride_id}/request",
-      "method": "POST",
-      "output_encoding": "json",
+      "endpoint": "/rides/{ride_id}/check_edition_permissions/",
+      "method": "GET",
+      "output_encoding": "no-op",
       "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
-          "url_pattern": "/rides/{ride_id}/request",
-          "encoding": "json",
-          "method": "POST",
+          "url_pattern": "/rides/{ride_id}/check_edition_permissions/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -205,22 +412,291 @@
       ]
     },
     {
-      "endpoint": "/rides/request/{request_id}",
-      "method": "DELETE",
-      "output_encoding": "json",
+      "endpoint": "/recurrent_rides/",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
-          "url_pattern": "/rides/request/{request_id}",
-          "encoding": "json",
+          "url_pattern": "/recurrent_rides/",
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "ride_service"
+            }
+          },
+          "encoding": "no-op",
+          "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/recurrent_rides/{ride_id}/",
+      "method": "PATCH",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/recurrent_rides/{ride_id}/",
+          "extra_config": {
+            "backend/http": {
+              "return_error_details": "ride_serivce"
+            }
+          },
+          "encoding": "no-op",
+          "method": "PATCH",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{ride_id}"
+      ]
+    },
+    {
+      "endpoint": "/recurrent_rides/{ride_id}/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/recurrent_rides/{ride_id}/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{ride_id}"
+      ]
+    },
+    {
+      "endpoint": "/recurrent_rides/{ride_id}/",
+      "method": "DELETE",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/recurrent_rides/{ride_id}/",
+          "encoding": "no-op",
           "method": "DELETE",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{ride_id}"
+      ]
+    },
+    {
+      "endpoint": "/recurrent_rides/user_rides/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "ride_type",
+        "driver_rate",
+        "start_date",
+        "seats",
+        "price_from",
+        "price_to",
+        "ordering",
+        "user_type"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/recurrent_rides/user_rides/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/requests/",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/requests/",
+          "encoding": "no-op",
+          "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/requests/{request_id}/",
+      "method": "DELETE",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/requests/{request_id}/",
+          "encoding": "no-op",
+          "method": "DELETE",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8001"
           ]
@@ -231,49 +707,291 @@
       ]
     },
     {
-      "endpoint": "/rides/request/{request_id}",
+      "endpoint": "/requests/{request_id}/decision/",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
-          "url_pattern": "/rides/request/{request_id}",
-          "encoding": "json",
+          "url_pattern": "/requests/{request_id}/decision/",
+          "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
-            "host.docker.internal:8003"
+            "host.docker.internal:8001"
           ]
         }
       ],
       "input_query_strings": [
         "{request_id}"
+      ]
+    },
+    {
+      "endpoint": "/requests/my_requests/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "start_date",
+        "ordering",
+        "decision"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/requests/my_requests/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/requests/pending_requests/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "start_date",
+        "ordering",
+        "decision"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/requests/pending_requests/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/history_rides/user_rides/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "ride_type",
+        "driver_rate",
+        "start_date",
+        "seats",
+        "price_from",
+        "price_to",
+        "ordering",
+        "user_type"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/history_rides/user_rides/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/history_recurrent_rides/user_rides/",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "input_query_strings": [
+        "page",
+        "city_from",
+        "city_from_state",
+        "city_from_county",
+        "city_from_lat",
+        "city_from_lng",
+        "city_to",
+        "city_to_state",
+        "city_to_county",
+        "city_to_lat",
+        "city_to_lng",
+        "ride_type",
+        "driver_rate",
+        "start_date",
+        "seats",
+        "price_from",
+        "price_to",
+        "ordering"
+      ],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/history_recurrent_rides/user_rides/",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8001"
+          ]
+        }
       ]
     },
     {
       "endpoint": "/users/{user_id}",
       "method": "GET",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
           "url_pattern": "/users/{user_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -284,50 +1002,185 @@
       ]
     },
     {
-      "endpoint": "/vehicles/{user_id}",
-      "method": "GET",
-      "output_encoding": "json",
-      "extra_config": {
-        "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/vehicles/{user_id}",
-          "encoding": "json",
-          "method": "GET",
-          "is_collection": true,
-          "host": [
-            "host.docker.internal:8003"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{user_id}"
-      ]
-    },
-    {
-      "endpoint": "/vehicles/{user_id}",
-      "method": "POST",
-      "output_encoding": "json",
+      "endpoint": "/users/{user_id}",
+      "method": "PATCH",
+      "output_encoding": "no-op",
       "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
-          "url_pattern": "/vehicles/{user_id}",
-          "encoding": "json",
+          "url_pattern": "/users/{user_id}",
+          "encoding": "no-op",
+          "method": "PATCH",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8003"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{user_id}"
+      ]
+    },
+    {
+      "endpoint": "/users/me",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/users/me",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8003"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/users/check_user",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/users/check_user",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8003"
+          ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/vehicles/user_vehicles/{user_id}",
+      "method": "GET",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/vehicles/user_vehicles/{user_id}",
+          "encoding": "no-op",
+          "method": "GET",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
+          "host": [
+            "host.docker.internal:8003"
+          ]
+        }
+      ],
+      "input_query_strings": [
+        "{user_id}"
+      ]
+    },
+    {
+      "endpoint": "/vehicles/user_vehicles/{user_id}",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
+      "extra_config": {
+        "auth/validator": {
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/vehicles/user_vehicles/{user_id}",
+          "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -340,20 +1193,33 @@
     {
       "endpoint": "/vehicles/{car_id}",
       "method": "DELETE",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
           "url_pattern": "/vehicles/{car_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "DELETE",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8003"
           ]
@@ -364,185 +1230,119 @@
       ]
     },
     {
-      "endpoint": "/notifications/new_request/{ride_id}",
-      "method": "POST",
-      "output_encoding": "json",
+      "endpoint": "/vehicles/{car_id}",
+      "method": "PATCH",
+      "output_encoding": "no-op",
       "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
-          "url_pattern": "/notifications/new_request/{ride_id}",
-          "encoding": "json",
-          "method": "POST",
+          "url_pattern": "/vehicles/{car_id}",
+          "encoding": "no-op",
+          "method": "PATCH",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
-            "host.docker.internal:8005"
+            "host.docker.internal:8003"
           ]
         }
       ],
       "input_query_strings": [
-        "{ride_id}"
+        "{car_id}"
       ]
     },
     {
-      "endpoint": "/notifications/request_confirm/{ride_id}",
-      "method": "POST",
-      "output_encoding": "json",
-      "input_headers": ["*"],
-      "extra_config": {
-        "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/notifications/request_confirm/{ride_id}",
-          "encoding": "json",
-          "method": "POST",
-          "host": [
-            "host.docker.internal:8005"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{ride_id}"
-      ]
-    },
-    {
-      "endpoint": "/notifications/edit_ride/{ride_id}",
-      "method": "POST",
-      "output_encoding": "json",
-      "input_headers": ["*"],
-      "extra_config": {
-        "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/notifications/edit_ride/{ride_id}",
-          "encoding": "json",
-          "method": "POST",
-          "host": [
-            "host.docker.internal:8005"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{ride_id}"
-      ]
-    },
-    {
-      "endpoint": "/notifications/ride_canceled/{ride_id}",
-      "method": "POST",
-      "output_encoding": "json",
-      "input_headers": ["*"],
-      "extra_config": {
-        "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/notifications/ride_canceled/{ride_id}",
-          "encoding": "json",
-          "method": "POST",
-          "host": [
-            "host.docker.internal:8005"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{ride_id}"
-      ]
-    },
-    {
-      "endpoint": "/notifications/user_resignation/{ride_id}",
-      "method": "POST",
-      "output_encoding": "json",
-      "input_headers": ["*"],
-      "extra_config": {
-        "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
-        }
-      },
-      "backend": [
-        {
-          "url_pattern": "/notifications/user_resignation/{ride_id}",
-          "encoding": "json",
-          "method": "POST",
-          "host": [
-            "host.docker.internal:8005"
-          ]
-        }
-      ],
-      "input_query_strings": [
-        "{ride_id}"
-      ]
-    },
-    {
-      "endpoint": "/reviews/{user_id}",
+      "endpoint": "/reviews/user_reviews/{user_id}",
       "method": "GET",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
-          "url_pattern": "/reviews/{user_id}",
-          "encoding": "json",
+          "url_pattern": "/reviews/user_reviews/{user_id}",
+          "encoding": "no-op",
           "method": "GET",
-          "is_collection": true,
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8004"
           ]
         }
       ],
       "input_query_strings": [
-        "{user_id}"
+        "{user_id}",
+        "user_type",
+        "rating_order",
+        "page",
+        "page_size",
+        "rating_from",
+        "rating_to"
       ]
     },
     {
-      "endpoint": "/reviews/{user_id}",
+      "endpoint": "/reviews/user_reviews/{user_id}",
       "method": "POST",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
       "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
-          "url_pattern": "/reviews/{user_id}",
-          "encoding": "json",
+          "url_pattern": "/reviews/user_reviews/{user_id}",
+          "encoding": "no-op",
           "method": "POST",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8004"
           ]
@@ -555,20 +1355,33 @@
     {
       "endpoint": "/reviews/{review_id}",
       "method": "DELETE",
-      "output_encoding": "json",
+      "output_encoding": "no-op",
+      "input_headers": ["*"],
       "extra_config": {
         "auth/validator": {
-            "alg": "RS256",
-            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
-            "disable_jwk_security": true
+          "alg": "RS256",
+          "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+          "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
+          "disable_jwk_security": true
         }
       },
       "backend": [
         {
           "url_pattern": "/reviews/{review_id}",
-          "encoding": "json",
+          "encoding": "no-op",
           "method": "DELETE",
+          "extra_config": {
+            "github.com/devopsfaith/krakend-martian": {
+              "header.Blacklist": {
+                "scope": [
+                  "response"
+                ],
+                "names": [
+                  "Access-Control-Allow-Origin"
+                ]
+              }
+            }
+          },
           "host": [
             "host.docker.internal:8004"
           ]
