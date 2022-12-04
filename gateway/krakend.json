@@ -13,8 +13,8 @@
       "extra_config": {
           "auth/validator": {
               "alg": "RS256",
-              "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-              "issuer": "http://localhost:8403/auth/realms/TraWell",
+              "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+              "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
               "disable_jwk_security": true,
               "cache": true
           }
@@ -34,8 +34,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -57,8 +57,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -82,8 +82,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -105,8 +105,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -131,8 +131,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -157,8 +157,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -185,8 +185,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -211,8 +211,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -238,8 +238,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -264,8 +264,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -290,8 +290,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -318,8 +318,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -344,8 +344,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -371,8 +371,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -398,8 +398,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -425,8 +425,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -452,8 +452,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -479,8 +479,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -505,8 +505,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -533,8 +533,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
@@ -559,8 +559,8 @@
       "extra_config": {
         "auth/validator": {
             "alg": "RS256",
-            "jwk_url": "http://host.docker.internal:8403/auth/realms/TraWell/protocol/openid-connect/certs",
-            "issuer": "http://localhost:8403/auth/realms/TraWell",
+            "jwk_url": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell/protocol/openid-connect/certs",
+            "issuer": "http://trawell.westeurope.cloudapp.azure.com:8403/auth/realms/TraWell",
             "disable_jwk_security": true
         }
       },
