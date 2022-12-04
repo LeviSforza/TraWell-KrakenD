@@ -1071,7 +1071,7 @@
             }
           },
           "host": [
-            "host.docker.internal:8003"
+            "http://localhost:8003"
           ]
         }
       ]
@@ -1107,7 +1107,7 @@
             }
           },
           "host": [
-            "host.docker.internal:8003"
+            "http://trawell.westeurope.cloudapp.azure.com:8003"
           ]
         }
       ]
