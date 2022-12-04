@@ -1071,7 +1071,7 @@
             }
           },
           "host": [
-            "http://trawell-rabbitmq_web_users_1:8003"
+             "20.234.163.1:8003"
           ]
         }
       ]
@@ -1107,7 +1107,7 @@
             }
           },
           "host": [
-            "http://trawell.westeurope.cloudapp.azure.com:8003"
+            "10.0.0.4:8003"
           ]
         }
       ]
